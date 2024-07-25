@@ -1,17 +1,8 @@
 # habito
-
 A new Flutter project.
 This app is made for tracking and assigning new lifestyle goals or achieve the set daily goals.
 Its helps in accesing the progress.
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Try the pre-release from here:
+https://github.com/dev-vasu/Habito/releases/tag/Flutter
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

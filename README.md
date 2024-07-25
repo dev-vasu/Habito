@@ -1,7 +1,8 @@
 # habito
 
 A new Flutter project.
-
+This app is made for tracking and assigning new lifestyle goals or achieve the set daily goals.
+Its helps in accesing the progress.
 ## Getting Started
 
 This project is a starting point for a Flutter application.

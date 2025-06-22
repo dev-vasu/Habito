@@ -63,11 +63,11 @@ Habito is a Flutter-based mobile application designed to help users build, track
 ## 🧠 Architecture Overview
 
 - lib/
-- ├── models/     # Habit data structure and models
-- ├── services/   # Local storage, analytics, helpers
-- ├── screens/    # UI pages (Dashboard, Insights, Add/Edit Habit)
-- ├── widgets/    # Reusable components (Progress bars, Cards, Toggles)
-- └── main.dart   # App entry point
+ ├── models/     # Habit data structure and models
+ ├── services/   # Local storage, analytics, helpers
+  ├── screens/    # UI pages (Dashboard, Insights, Add/Edit Habit)
+├── widgets/    # Reusable components (Progress bars, Cards, Toggles)
+  └── main.dart   # App entry point
 
 
 

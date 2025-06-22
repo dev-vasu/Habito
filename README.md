@@ -1,49 +1,100 @@
 # 📱 Habito – Habit Tracking Mobile Application
 
-A Flutter-based mobile app to help users build daily habits with interactive tracking, visual insights, and motivational feedback.
+Habito is a Flutter-based mobile application designed to help users build, track, and maintain daily habits through an engaging and interactive interface. With real-time visual feedback, weekly insights, and a beautifully clean UI, Habito empowers you to take control of your routines and make meaningful self-improvements.
 
 ---
 
-## 🎯 Purpose
+## 📲 Try the App – Flutter Release
 
-To empower users to form consistent habits through intuitive design, progress visualization, and weekly insights that highlight behavior patterns.
+🎉 A pre-release build of **Habito** is now available for Android devices!
+
+<div align="center">
+  <a href="https://github.com/dev-vasu/Habito/releases/tag/Flutter">
+    <img src="https://img.shields.io/badge/Download%20APK-Pre--Release-green?style=for-the-badge&logo=android" alt="Download APK">
+  </a>
+</div>
+
+---
+
+### ⚙️ How to Install
+
+1. Visit the **Releases** tab or click the badge above.
+2. Download the `.apk` file from the **Flutter Pre-Release**.
+3. Transfer it to your Android phone.
+4. Enable installation from unknown sources (if needed).
+5. Tap and install. Enjoy habit tracking on the go! ✅
+
+> 🧪 Note: This build is intended for demonstration and testing. More features are in development!
+
+---
+
+## 🖼️ App Preview
+
+<p float="left">
+  <img src="https://github.com/dev-vasu/Habito/blob/main/screenshots/Screenshot_20240725_165643.png" width="200"/>
+  <img src="https://github.com/dev-vasu/Habito/blob/main/screenshots/Screenshot_20240725_165708.png" width="200"/>
+  <img src="https://github.com/dev-vasu/Habito/blob/main/screenshots/Screenshot_20240725_165718.png" width="200"/>
+  <img src="https://github.com/dev-vasu/Habito/blob/main/screenshots/Screenshot_20240725_165731.png" width="200"/>
+</p>
 
 ---
 
 ## ✨ Features
 
-- Daily & Weekly Habit Tracking
-- Real-time Progress Charts
-- Weekly Insights: Best/Worst Habits
-- Streaks and Motivation Quotes
+- ✅ Daily and Weekly Habit Logging  
+- 📊 Track Progress with Visual Charts  
+- 📆 Weekly Reports for Top/Bottom Habits  
+- 🧠 Streak System to Boost Motivation  
+- 🎯 Minimal UI with Responsive Flutter Components  
 
 ---
 
-## 🛠️ Built With
+## 🛠️ Tech Stack
 
-- Dart (Flutter)
-- SQLite or Firebase (Optional Sync)
-- Provider for State Management
-- Material Design Guidelines
-
----
-
-## 🖼️ App Previews
-
-https://github.com/dev-vasu/Habito/blob/main/screenshots/Screenshot_20240725_165643.png
-screenshots/Screenshot_20240725_165708.png
+- **Flutter** (Dart SDK)  
+- **SQLite** (Local storage, offline-ready)  
+- **Provider** (State Management)  
+- **Material Design** for modern UI
 
 ---
 
+## 🧠 Architecture Overview
 
+```
+lib/
+├── models/           # Habit data structure
+├── services/         # Local storage, logic helpers
+├── screens/          # UI pages (Home, Insights, Add Habit, etc.)
+├── widgets/          # Reusable components (Progress bar, Cards)
+└── main.dart         # App Entry Point
+```
 
-## 🔮 Planned Features
+- **Model Layer**: Defines each habit and tracking metrics  
+- **Controller Layer**: Calculates progress, manages persistence  
+- **View Layer**: Displays interactive visualizations and inputs  
 
-- Push Notifications & Reminders
-- Cloud Sync & Auth
-- Group Challenges & Sharing
-- Light/Dark Theme Support
+---
 
-Try the pre-release from here:
-https://github.com/dev-vasu/Habito/releases/tag/Flutter
+## 🔮 Roadmap
 
+- 🔔 Notification Reminders  
+- ☁️ Firebase Cloud Sync & Authentication  
+- 🌗 Dark Mode  
+- 🏆 Social Habit Challenges  
+- 📈 Deep Analytics Dashboard
+
+---
+
+## 🤝 Contributing
+
+Want to contribute to Habito? Fork the repo and submit a PR! New features, bug fixes, and UI suggestions are welcome.
+
+---
+
+## 📎 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+> Built with ❤️ using Flutter by Vasudev Singh Jamwal

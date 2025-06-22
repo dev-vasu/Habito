@@ -1,5 +1,7 @@
 # 📱 Habito – Habit Tracking Mobile Application
 
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+
 Habito is a Flutter-based mobile application designed to help users build, track, and maintain daily habits through an engaging and interactive interface. With real-time visual feedback, weekly insights, and a beautifully clean UI, Habito empowers you to take control of your routines and make meaningful self-improvements.
 
 ---
@@ -60,14 +62,13 @@ Habito is a Flutter-based mobile application designed to help users build, track
 
 ## 🧠 Architecture Overview
 
-```
 lib/
-├── models/           # Habit data structure
-├── services/         # Local storage, logic helpers
-├── screens/          # UI pages (Home, Insights, Add Habit, etc.)
-├── widgets/          # Reusable components (Progress bar, Cards)
-└── main.dart         # App Entry Point
-```
+├── models/ # Habit data structure
+├── services/ # Local storage, logic helpers
+├── screens/ # UI pages (Home, Insights, Add Habit, etc.)
+├── widgets/ # Reusable components (Progress bar, Cards)
+└── main.dart # App Entry Point
+
 
 - **Model Layer**: Defines each habit and tracking metrics  
 - **Controller Layer**: Calculates progress, manages persistence  
@@ -93,8 +94,8 @@ Want to contribute to Habito? Fork the repo and submit a PR! New features, bug f
 
 ## 📎 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
 
----
-
-> Built with ❤️ using Flutter by Vasudev Singh Jamwal
+<p align="left">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License Badge">
+</p>

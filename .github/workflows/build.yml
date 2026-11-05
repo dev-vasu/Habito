@@ -1,4 +1,4 @@
-name: Build Habito Mobile Releases
+name: Build Habito Production Release (Play Store & App Store)
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-android:
-    name: Build Android APK & App Bundle
+    name: Build Production AAB (Google Play) & APK
     runs-on: ubuntu-latest
 
     steps:
@@ -37,27 +37,63 @@ jobs:
       - name: Run Tests
         run: flutter test
 
-      - name: Build Android Release APK
-        run: flutter build apk --release --split-per-abi
+      # If production signing secrets exist in repo settings, inject key.properties
+      - name: Configure Production Signing Keystore
+        if: env.KEYSTORE_BASE64 != ''
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          echo "storePassword=$KEYSTORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
 
-      - name: Build Universal Release APK
+      # 1. Build Production Android App Bundle (.aab) for Google Play Console
+      - name: Build Google Play Store Bundle (.aab)
+        run: flutter build appbundle --release
+
+      # 2. Build Release APK (.apk) for direct sideloading
+      - name: Build Sideloadable Release APK (.apk)
         run: flutter build apk --release
 
+      # 3. Upload Play Store AAB Artifact
+      - name: Upload Play Store AAB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: habito-production-playstore-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
+      # 4. Upload Sideloadable APK Artifact
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: habito-android-apk
+          name: habito-sideload-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Create GitHub Release (on tag)
+      # 5. Create GitHub Release with both AAB & APK on release tags
+      - name: Publish to GitHub Releases
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: build/app/outputs/flutter-apk/app-release.apk
-          name: Habito Release ${{ github.ref_name }}
+          files: |
+            build/app/outputs/bundle/release/app-release.aab
+            build/app/outputs/flutter-apk/app-release.apk
+          name: Habito Production Release ${{ github.ref_name }}
           body: |
-            ## 📱 Habito ${{ github.ref_name }} Release
-            - Download `app-release.apk` below to install on your Android device.
-            - Ensure "Install from Unknown Sources" is enabled in your Android settings.
+            ## 🚀 Habito ${{ github.ref_name }} Production Release
+
+            ### 📦 Distribution Packages:
+            * **Google Play Store:** Upload `app-release.aab` directly to Google Play Console.
+            * **Direct Android Install:** Download `app-release.apk` to install directly onto Android devices.
+
+            ### ✨ What's Included:
+            * Neo-Brutalist design system
+            * Persistent local storage
+            * Cross-device vault sync & migration (HAB-XXXX-XXXX)
+            * Goal frequency targets & streak shields
           draft: false
           prerelease: false

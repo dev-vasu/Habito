@@ -1,0 +1,8 @@
+# Production Keystore Configuration for Google Play Store
+# Copy this file to 'android/key.properties' and fill in your values
+# DO NOT commit your private key.properties or .jks to public git!
+
+storePassword=YOUR_KEYSTORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=upload
+storeFile=upload-keystore.jks

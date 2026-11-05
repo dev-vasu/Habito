@@ -27,6 +27,36 @@
 
 ---
 
+## 🎬 Video Walkthrough & Vocal Step-by-Step Guide
+
+Watch the complete, high-definition audiovisual tutorial walking through how to download, install, personalize, and seamlessly migrate Habito across devices with spoken vocal narration.
+
+<p align="center">
+  <a href="./media/habito_v2_walkthrough.mp4">
+    <img src="./media/habito_v2_walkthrough.gif" width="100%" alt="Habito v2 Full Walkthrough Video Preview"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="./media/habito_v2_walkthrough.mp4">
+    <img src="https://img.shields.io/badge/▶%EF%B8%8F%20Play%20Full%20HD%20Video-1080p%20with%20Audio-E11D48?style=for-the-badge&logo=youtube&logoColor=white" alt="Play Walkthrough Video"/>
+  </a>
+  <a href="https://github.com/dev-vasu/Habito/releases/tag/v2.0.0">
+    <img src="https://img.shields.io/badge/📦%20Get%20APK-Release%20v2.0.0-16A34A?style=for-the-badge&logo=android&logoColor=white" alt="Get APK"/>
+  </a>
+</p>
+
+### 🎙️ Video Chapters & Step Breakdown:
+1. **0:00 - Introduction & Neo-Brutalist Architecture:** Overview of Habito v2.0, local-first design philosophy, zero cloud lock-in, and tactile interactions.
+2. **0:16 - Step 1: Downloading from GitHub Releases:** Choosing between `app-release.apk` (direct phone sideload) and `app-release.aab` (official Google Play Store bundle).
+3. **0:33 - Step 2: One-Tap Android Installation:** Bypassing sign-up walls, granting standard package permissions, and launching directly into your protocol.
+4. **0:50 - Step 3: Profile Customization & Live Fuel Gauge:** Personalizing your Commander callsign, setting a personal motto, choosing your avatar badge, and monitoring your real-time daily fuel completion.
+5. **1:05 - Step 4: Tracking Daily Protocols & Streak Shields:** Completing daily habits, understanding frequency schedules (7/7, 5/7, flexible), earning streak shields, and reviewing 7-day angular FL consistency curves.
+6. **1:21 - Step 5: Collision-Proof Cross-Device Vault Migration:** Generating an 8-character cryptographic token (`HAB-XXXX-XXXX`), enabling optional 4-digit PIN encryption, burn-on-redeem protection, and instant 1-tap restore on a new device.
+7. **1:42 - Conclusion & Get Started:** How to star the repository, grab the release, and build unstoppable daily discipline.
+
+---
+
 ## 📸 High-Quality Feature Showcases
 
 ### ⚡ 01. Neo-Brutalist Daily Engine & Energy Fuel Gauge

@@ -54,11 +54,11 @@ jobs:
 
       # 1. Build Production Android App Bundle (.aab) for Google Play Console
       - name: Build Google Play Store Bundle (.aab)
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --no-tree-shake-icons
 
       # 2. Build Release APK (.apk) for direct sideloading
       - name: Build Sideloadable Release APK (.apk)
-        run: flutter build apk --release
+        run: flutter build apk --release --no-tree-shake-icons
 
       # 3. Upload Play Store AAB Artifact
       - name: Upload Play Store AAB Artifact
@@ -74,7 +74,7 @@ jobs:
           name: habito-sideload-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      # 5. Create GitHub Release with both AAB & APK on release tags
+      # 5. Create or Update GitHub Release with both AAB & APK
       - name: Publish to GitHub Releases
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
@@ -86,14 +86,14 @@ jobs:
           body: |
             ## 🚀 Habito ${{ github.ref_name }} Production Release
 
-            ### 📦 Distribution Packages:
-            * **Google Play Store:** Upload `app-release.aab` directly to Google Play Console.
-            * **Direct Android Install:** Download `app-release.apk` to install directly onto Android devices.
+            ### 📦 Direct Downloads:
+            * **`app-release.aab`** – Official Production Android App Bundle for Google Play Console.
+            * **`app-release.apk`** – Universal Release APK for direct installation on Android phones.
 
-            ### ✨ What's Included:
-            * Neo-Brutalist design system
-            * Persistent local storage
-            * Cross-device vault sync & migration (HAB-XXXX-XXXX)
-            * Goal frequency targets & streak shields
+            ### ✨ Highlights:
+            * Neo-Brutalist design language
+            * Persistent local storage with SharedPreferences
+            * Collision-proof cross-device vault migration & PIN encryption
+            * Goal frequency targets (7/7, 5/7, 3/7) & streak freeze shields
           draft: false
           prerelease: false

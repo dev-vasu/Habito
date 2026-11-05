@@ -1,32 +1,26 @@
-# 📱 Habito – Habit Tracking Mobile Application
+# 📱 Habito v2.0 – Habit Tracking Mobile Application
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Version](https://img.shields.io/badge/Version-2.0.0-purple.svg)
+![Flutter](https://img.shields.io/badge/Flutter-3.4+-blue.svg)
 
-Habito is a Flutter-based mobile application designed to help users build, track, and maintain daily habits through an engaging and interactive interface. With real-time visual feedback, weekly insights, and a beautifully clean UI, Habito empowers you to take control of your routines and make meaningful self-improvements.
-
----
-
-## 📲 Try the App – Flutter Release
-
-🎉 A pre-release build of **Habito** is now available for Android devices!
-
-<div align="center">
-  <a href="https://github.com/dev-vasu/Habito/releases/tag/Flutter">
-    <img src="https://img.shields.io/badge/Download%20APK-Pre--Release-green?style=for-the-badge&logo=android" alt="Download APK">
-  </a>
-</div>
+Habito is a modern Flutter mobile application designed to help users build, track, and maintain daily routines with real-time feedback, dynamic streak tracking, weekly performance insights, and responsive data charts.
 
 ---
 
-### ⚙️ How to Install
+## 🚀 What's New in Version 2.0 (Upgrade)
 
-1. Visit the **Releases** tab or click the badge above.
-2. Download the `.apk` file from the **Flutter Pre-Release**.
-3. Transfer it to your Android phone.
-4. Enable installation from unknown sources (if needed).
-5. Tap and install. Enjoy habit tracking on the go! ✅
+Habito v2.0 addresses and overcomes the limitations, hardcoded data, and lack of persistence found in the initial v1.0 release:
 
-> 🧪 Note: This build is intended for demonstration and testing. More features are in development!
+| Area | v1.0 (Initial) | v2.0 (Current Upgrade) |
+| :--- | :--- | :--- |
+| **Data Persistence** | ❌ None (lost on app close) | ✅ **Persistent Local Storage** using JSON + `SharedPreferences` |
+| **Habit Management** | ⚠️ Add only (hardcoded icon & default text) | ✅ **Full CRUD**: Create with custom icons & colors, Edit, & Delete with confirmation |
+| **Trend Charts** | ❌ 780 lines of hardcoded fake data | ✅ **Dynamic 7-Day Trend Charts** driven by real user logs |
+| **Progress & Ranking**| ❌ Hardcoded percentages (100%, 95%, 82%) | ✅ **Real Dynamic Analytics**: Top habits, areas to focus, and weekly consistency |
+| **Streak Engine** | ❌ Static placeholders | ✅ **Live Streak Counter** (consecutive days & personal bests) |
+| **UI & Layout** | ⚠️ Fixed 513px heights (overflow bugs) | ✅ **Adaptive & Responsive Layouts** with Material 3 theming |
+| **Architecture** | ⚠️ Untyped `List<dynamic>` in static file | ✅ **Typed Models & Reactive Service** (`HabitScope` / `ChangeNotifier`) |
 
 ---
 
@@ -43,43 +37,60 @@ Habito is a Flutter-based mobile application designed to help users build, track
 
 ## ✨ Features
 
-- ✅ Daily and Weekly Habit Logging  
-- 📊 Track Progress with Visual Charts  
-- 📆 Weekly Reports for Top/Bottom Habits  
-- 🧠 Streak System to Boost Motivation  
-- 🎯 Minimal UI with Responsive Flutter Components  
+- **Daily Check-Ins:** One-tap habit completion with instant progress feedback and daily completion percentages.
+- **Custom Habit Creation:** Choose from 14+ curated icons and personalized color palettes.
+- **Live Streaks (🔥):** Keep your momentum going with automatic streak calculation.
+- **Dynamic Weekly Insights:** Discover your top habits and areas that need attention based on calculated completion rates.
+- **Interactive 7-Day Trends:** Responsive FL Chart line charts plotting cumulative consistency for each individual habit.
+- **Edit & Delete:** Full control over your habits, with confirmation alerts before deleting.
+- **Offline First:** Fast, reliable offline data storage that preserves state between sessions.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Flutter** (Dart SDK)  
-- **SQLite** (Local storage, offline-ready)  
-- **Provider** (State Management)  
-- **Material Design** for modern UI
+- **Framework:** [Flutter](https://flutter.dev) (Dart SDK `>=3.4.3 <4.0.0`)
+- **State Management:** Reactive `ChangeNotifier` with `InheritedNotifier` (`HabitScope`)
+- **Persistence:** `shared_preferences`
+- **Charts:** `fl_chart`
+- **Design:** Material 3 with custom gradients and iconography
+
+---
+
+## 📂 Project Structure
+
+```text
+lib/
+├── main.dart                  # App bootstrap, Material 3 theming & navigation
+├── models/
+│   └── habit.dart             # Typed Habit model, JSON serialization & streak algorithms
+├── pages/
+│   ├── homePage.dart          # Daily check-in list, progress bar, add/edit/delete modals
+│   ├── progressPage.dart      # Real weekly rankings, top performers, focus areas
+│   └── habitsPage.dart        # Scrollable 7-day trend graphs per habit
+└── services/
+    ├── habit_service.dart     # Persistent CRUD storage & analytics engine
+    ├── chartsBuilder.dart     # Dynamic FL Chart card widget
+    └── lists.dart             # Icon choices and curated color palettes
+```
 
 ---
 
 ## 🔮 Roadmap
 
-- 🔔 Notification Reminders  
-- ☁️ Firebase Cloud Sync & Authentication  
-- 🌗 Dark Mode  
-- 🏆 Social Habit Challenges  
-- 📈 Deep Analytics Dashboard
+- [ ] Push notification reminders
+- [ ] Multi-week historical calendar heatmaps
+- [ ] Dark Mode support
+- [ ] Cloud sync and backup
 
 ---
 
 ## 🤝 Contributing
 
-Want to contribute to Habito? Fork the repo and submit a PR! New features, bug fixes, and UI suggestions are welcome.
+Contributions, issues, and feature requests are welcome! Feel free to check the issues tab.
 
 ---
 
 ## 📎 License
 
 This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
-
-<p align="left">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License Badge">
-</p>

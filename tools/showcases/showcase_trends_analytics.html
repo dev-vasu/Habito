@@ -7,184 +7,224 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;900&family=JetBrains+Mono:wght@700;800&family=Bungee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     body { font-family: 'Space Grotesk', sans-serif; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-    .brutal-shadow { box-shadow: 4px 4px 0px #1E1E1E; }
-    .brutal-shadow-sm { box-shadow: 2px 2px 0px #1E1E1E; }
-    .brutal-shadow-lg { box-shadow: 6px 6px 0px #1E1E1E; }
-    .phone-container {
-      width: 440px;
-      height: 920px;
-      border-radius: 46px;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 10px #1E1E1E;
-      position: relative;
+    .font-sans-ui { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .brutal-shadow-xs { box-shadow: 2px 2px 0px #09090B; }
+    .brutal-shadow-sm { box-shadow: 3px 3px 0px #09090B; }
+    .brutal-shadow { box-shadow: 5px 5px 0px #09090B; }
+    .brutal-shadow-lg { box-shadow: 8px 8px 0px #09090B; }
+
+    .iphone-frame {
+      width: 420px;
+      height: 870px;
+      border-radius: 54px;
       background: #FFFDF0;
+      box-shadow: 
+        0 0 0 4px #27272A,
+        0 0 0 10px #09090B,
+        0 30px 90px -20px rgba(0, 0, 0, 0.8),
+        0 0 50px rgba(77, 150, 255, 0.15);
+      position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
+
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .dynamic-island {
+      height: 36px;
+      background: #09090B;
+      border-radius: 20px;
+      border: 2px solid #60A5FA;
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+
+    .bg-grid-tech {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-800 antialiased py-10 px-4 flex flex-col items-center justify-center">
+<body class="bg-[#090D16] bg-grid-tech text-slate-100 py-10 px-4 flex flex-col items-center justify-center min-h-screen">
 
   <!-- Header -->
   <div class="text-center mb-6 max-w-xl px-4">
-    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#4D96FF] text-white border-2 border-[#1E1E1E] rounded-lg text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
-      <i class="fa-solid fa-chart-line"></i> Analytics & Streak Shields
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#4D96FF] text-white border-2 border-[#09090B] rounded-xl text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
+      <i class="fa-solid fa-chart-line"></i> Analytics &amp; Streak Shields
     </div>
-    <h1 class="text-3xl font-black text-white tracking-tight">Effort Audit &amp; Momentum Curves</h1>
-    <p class="text-sm text-slate-400 mt-1">Zero fake data. Real 7-day angular FL consistency curves, streak tracking, and streak freeze shields.</p>
+    <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight">Effort Audit &amp; Momentum Curves</h1>
+    <p class="text-sm text-slate-400 font-sans-ui mt-1">Zero fake data. Real 7-day angular FL consistency curves, streak tracking &amp; freeze shields.</p>
   </div>
 
-  <!-- Interactive Phone Frame -->
-  <div class="phone-container border-4 border-[#1E1E1E]">
-    <!-- Status Bar -->
-    <div class="h-10 px-6 flex justify-between items-center text-xs font-black text-[#1E1E1E] z-30 pt-1">
-      <span>9:41</span>
-      <div class="w-24 h-4 bg-[#1E1E1E] rounded-full mx-auto"></div>
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-signal text-xs"></i>
-        <i class="fa-solid fa-wifi text-xs"></i>
-        <i class="fa-solid fa-battery-full text-xs"></i>
+  <!-- Interactive iPhone Chassis -->
+  <div class="iphone-frame">
+    
+    <!-- iOS Status Bar & Dynamic Island -->
+    <div class="h-12 px-7 flex items-center justify-between text-xs font-black text-[#09090B] z-40 pt-1 select-none">
+      <span class="font-bold tracking-tight">9:41</span>
+      
+      <!-- Dynamic Island -->
+      <div class="dynamic-island w-64">
+        <div class="flex items-center gap-1.5 overflow-hidden">
+          <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+          <span class="text-[11px] font-black text-white font-mono-code tracking-wider">📊 88% WEEKLY ADHERENCE</span>
+        </div>
+        <div class="w-3 h-3 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center">
+          <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 text-xs text-[#09090B]">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <div class="w-5 h-2.5 rounded-sm border border-[#09090B] p-0.5 flex items-center">
+          <div class="h-full w-full bg-[#09090B]"></div>
+        </div>
       </div>
     </div>
 
-    <!-- Screen Content -->
-    <div class="flex-1 px-5 pt-2 pb-6 space-y-3.5 flex flex-col justify-between">
+    <!-- Mobile Screen Content -->
+    <div class="flex-1 overflow-hidden px-5 pt-1 pb-20 space-y-3 select-none flex flex-col justify-between">
 
-      <!-- AUDIT HEADER -->
-      <div class="bg-[#FFE66D] p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex justify-between items-center">
+      <!-- 1. AUDIT HEADER -->
+      <div class="bg-[#FFE66D] p-3 rounded-2xl border-3 border-[#09090B] brutal-shadow flex justify-between items-center">
         <div>
-          <span class="text-[9px] font-black uppercase tracking-wider text-[#1E1E1E] block">ANALYTICS ENGINE</span>
-          <h4 class="text-base font-black text-[#1E1E1E]">EFFORT AUDIT &amp; METRICS</h4>
+          <span class="text-[8px] font-black uppercase tracking-wider text-[#09090B] block">ANALYTICS ENGINE</span>
+          <h4 class="text-base font-black text-[#09090B]">EFFORT AUDIT &amp; METRICS</h4>
         </div>
-        <div class="px-2.5 py-1 bg-white text-[#1E1E1E] rounded-lg border-2 border-[#1E1E1E] brutal-shadow-sm text-[10px] font-black">
+        <div class="px-2 py-0.5 bg-white text-[#09090B] rounded-lg border border-[#09090B] text-[9px] font-black">
           THIS MONTH
         </div>
       </div>
 
-      <!-- THREE STAT BOXES -->
-      <div class="grid grid-cols-3 gap-2.5">
-        <!-- Box 1 -->
-        <div class="bg-[#6BCB77] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
-          <span class="text-2xl font-black text-[#1E1E1E] block">14</span>
-          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">CURRENT</span>
-          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">DAYS STREAK</span>
+      <!-- 2. THREE STAT BOXES -->
+      <div class="grid grid-cols-3 gap-2">
+        <div class="bg-[#A3E635] p-2.5 rounded-2xl border-2 border-[#09090B] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#09090B] block">14</span>
+          <span class="text-[8px] font-black uppercase text-[#09090B] block">CURRENT</span>
+          <span class="text-[7px] font-bold text-[#09090B]/80 block font-mono-code">DAYS STREAK</span>
         </div>
-        <!-- Box 2 -->
-        <div class="bg-[#93C5FD] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
-          <span class="text-2xl font-black text-[#1E1E1E] block">21</span>
-          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">RECORD</span>
-          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">BEST STREAK</span>
+        <div class="bg-[#93C5FD] p-2.5 rounded-2xl border-2 border-[#09090B] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#09090B] block">21</span>
+          <span class="text-[8px] font-black uppercase text-[#09090B] block">RECORD</span>
+          <span class="text-[7px] font-bold text-[#09090B]/80 block font-mono-code">BEST STREAK</span>
         </div>
-        <!-- Box 3 -->
-        <div class="bg-[#DDD6FE] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
-          <span class="text-2xl font-black text-[#1E1E1E] block">2</span>
-          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">SHIELDS</span>
-          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">ACTIVE DEFENSE</span>
+        <div class="bg-[#DDD6FE] p-2.5 rounded-2xl border-2 border-[#09090B] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#09090B] block">2</span>
+          <span class="text-[8px] font-black uppercase text-[#09090B] block">SHIELDS</span>
+          <span class="text-[7px] font-bold text-[#09090B]/80 block font-mono-code">ACTIVE DEFENSE</span>
         </div>
       </div>
 
-      <!-- 7-DAY CONSISTENCY CHART CARD -->
-      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
+      <!-- 3. 7-DAY CONSISTENCY AUDIT CARD -->
+      <div class="bg-white p-3.5 rounded-2xl border-3 border-[#09090B] brutal-shadow space-y-1.5">
         <div class="flex justify-between items-center">
-          <span class="text-[11px] font-black uppercase tracking-wider text-[#1E1E1E]">7-DAY CONSISTENCY AUDIT</span>
-          <span class="text-[11px] font-black text-emerald-600">88% ADHERENCE</span>
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#09090B]">7-DAY CONSISTENCY AUDIT</span>
+          <span class="text-[10px] font-black text-emerald-600 font-mono-code">88% ADHERENCE</span>
         </div>
 
-        <!-- Visual Bar Chart -->
-        <div class="h-28 flex items-end justify-between px-2 pt-2 border-b-2 border-slate-200 pb-2">
-          <!-- Mon -->
+        <div class="h-28 flex items-end justify-between px-1.5 pt-2 border-b-2 border-slate-200 pb-1">
           <div class="flex flex-col items-center gap-1">
             <span class="text-[8px] font-bold text-slate-400">75%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 60px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">M</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 55px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">M</span>
           </div>
-          <!-- Tue -->
           <div class="flex flex-col items-center gap-1">
-            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">T</span>
+            <span class="text-[8px] font-black text-emerald-600">100%</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 75px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">T</span>
           </div>
-          <!-- Wed -->
           <div class="flex flex-col items-center gap-1">
             <span class="text-[8px] font-bold text-slate-400">60%</span>
-            <div class="w-6 bg-[#FFE66D] border-2 border-[#1E1E1E] rounded-t-md" style="height: 48px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">W</span>
+            <div class="w-6 bg-[#FFE66D] border-2 border-[#09090B] rounded-t-md" style="height: 42px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">W</span>
           </div>
-          <!-- Thu -->
           <div class="flex flex-col items-center gap-1">
-            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">T</span>
+            <span class="text-[8px] font-black text-emerald-600">100%</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 75px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">T</span>
           </div>
-          <!-- Fri -->
           <div class="flex flex-col items-center gap-1">
-            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">F</span>
+            <span class="text-[8px] font-black text-emerald-600">100%</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 75px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">F</span>
           </div>
-          <!-- Sat -->
           <div class="flex flex-col items-center gap-1">
             <span class="text-[8px] font-bold text-slate-400">75%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 60px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">S</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 55px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">S</span>
           </div>
-          <!-- Sun -->
           <div class="flex flex-col items-center gap-1">
             <span class="text-[8px] font-bold text-slate-400">90%</span>
-            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 72px;"></div>
-            <span class="text-[10px] font-black text-[#1E1E1E]">S</span>
+            <div class="w-6 bg-[#A3E635] border-2 border-[#09090B] rounded-t-md" style="height: 68px;"></div>
+            <span class="text-[9px] font-black text-[#09090B]">S</span>
           </div>
         </div>
       </div>
 
-      <!-- FREEZE SHIELD DEFENSE CARD -->
-      <div class="bg-[#DDD6FE] p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-white border-2 border-[#1E1E1E] flex items-center justify-center text-xl flex-shrink-0">
+      <!-- 4. FREEZE SHIELD DEFENSE CARD -->
+      <div class="bg-[#DDD6FE] p-2.5 rounded-2xl border-3 border-[#09090B] brutal-shadow flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white border-2 border-[#09090B] flex items-center justify-center text-lg flex-shrink-0">
           🛡️
         </div>
         <div>
-          <h5 class="text-xs font-black text-[#1E1E1E]">2 Active Streak Freeze Shields</h5>
-          <p class="text-[10px] font-bold text-slate-700">Auto-protects streak if travel or emergency prevents check-in.</p>
+          <h5 class="text-xs font-black text-[#09090B]">2 Active Streak Freeze Shields</h5>
+          <p class="text-[9px] font-bold text-slate-700">Auto-protects streak if travel or emergency prevents check-in.</p>
         </div>
       </div>
 
-      <!-- RANKED PROTOCOL ADHERENCE BREAKDOWN -->
-      <div class="bg-white p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-1.5">
-        <span class="text-[9px] font-black uppercase tracking-wider text-slate-500">PROTOCOL RANKINGS (BY ADHERENCE)</span>
+      <!-- 5. PROTOCOL RANKINGS -->
+      <div class="bg-white p-2.5 rounded-2xl border-3 border-[#09090B] brutal-shadow space-y-1">
+        <span class="text-[8px] font-black uppercase tracking-wider text-slate-500">PROTOCOL RANKINGS (BY ADHERENCE)</span>
         
-        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
-          <span class="font-black text-[#1E1E1E]">🥇 Morning Deep Work (4h)</span>
-          <span class="font-black text-emerald-700">95% • 21 Checks</span>
+        <div class="bg-slate-50 p-1.5 rounded-xl border border-slate-200 flex justify-between items-center text-[11px]">
+          <span class="font-black text-[#09090B]">🥇 Morning Deep Work (4h)</span>
+          <span class="font-black text-emerald-700 font-mono-code">95% • 21 Checks</span>
         </div>
 
-        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
-          <span class="font-black text-[#1E1E1E]">🥈 Hydration (3.0 Liters)</span>
-          <span class="font-black text-emerald-700">88% • 18 Checks</span>
-        </div>
-      </div>
-
-      <!-- Bottom Navigation Bar (UNCROPPED!) -->
-      <div class="bg-white rounded-2xl border-2 border-[#1E1E1E] brutal-shadow px-4 py-2 flex justify-between items-center text-xs font-black">
-        <div class="text-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
-          <i class="fa-solid fa-bolt text-xs"></i> PROTOCOLS
-        </div>
-        <div class="px-3 py-1.5 rounded-xl bg-[#1E1E1E] text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-chart-simple text-xs"></i> AUDIT
-        </div>
-        <div class="text-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
-          <i class="fa-solid fa-rotate text-xs"></i> SYNC
+        <div class="bg-slate-50 p-1.5 rounded-xl border border-slate-200 flex justify-between items-center text-[11px]">
+          <span class="font-black text-[#09090B]">🥈 Hydration (3.0 Liters)</span>
+          <span class="font-black text-emerald-700 font-mono-code">88% • 18 Checks</span>
         </div>
       </div>
 
     </div>
 
-    <!-- Home Indicator -->
-    <div class="w-32 h-1 bg-[#1E1E1E] rounded-full mx-auto mb-2"></div>
+    <!-- FLOATING DOCK BOTTOM NAVIGATION BAR -->
+    <div class="absolute bottom-3 left-4 right-4 bg-white rounded-3xl border-3 border-[#09090B] brutal-shadow p-2 flex justify-around items-center z-30">
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl text-[#09090B] font-black text-xs">
+        <i class="fa-solid fa-bolt text-xs"></i> PROTOCOLS
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-[#09090B] text-white font-black text-xs border-2 border-[#09090B]">
+        <i class="fa-solid fa-chart-simple text-xs text-blue-400"></i> AUDIT
+      </div>
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl text-[#09090B] font-black text-xs">
+        <i class="fa-solid fa-shield-halved text-xs"></i> SYNC
+      </div>
+    </div>
+
+    <!-- iPhone Home Indicator Bar -->
+    <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#09090B] rounded-full z-40"></div>
   </div>
 
 </body>

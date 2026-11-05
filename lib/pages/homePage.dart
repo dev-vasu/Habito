@@ -759,23 +759,31 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    height: 18,
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border:
-                          Border.all(color: NeoBrutalism.black, width: 2),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: LinearProgressIndicator(
-                        value: progress.clamp(0.0, 1.0),
-                        backgroundColor: Colors.transparent,
-                        color: NeoBrutalism.black,
-                      ),
-                    ),
+                  // 12-Segment Automotive Tachometer Fuel Gauge
+                  Row(
+                    children: List.generate(12, (index) {
+                      final activeSegments =
+                          (progress.clamp(0.0, 1.0) * 12).round();
+                      final isActive = index < activeSegments;
+                      return Expanded(
+                        child: Container(
+                          height: 16,
+                          margin: EdgeInsets.only(
+                            right: index < 11 ? 3.0 : 0.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isActive
+                                ? NeoBrutalism.black
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(3),
+                            border: Border.all(
+                              color: NeoBrutalism.black,
+                              width: 1.5,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                   const SizedBox(height: 8),
                   Text(

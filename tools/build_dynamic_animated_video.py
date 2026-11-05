@@ -24,15 +24,16 @@ def get_font(path, size):
         return ImageFont.load_default()
 
 # Colors
-BG_STUDIO = "#0B0F19"      # Deep studio slate
+BG_STUDIO = "#090D16"      # Deep studio slate
 CANVAS_BG = "#FFFDF0"      # Neo-Brutalist butter cream
-TEXT_DARK = "#1E1E1E"      # Deep black ink
-BORDER_DARK = "#1E1E1E"    # Solid outline
-SHADOW_DARK = "#1E1E1E"    # Hard shadow
+TEXT_DARK = "#09090B"      # Deep black ink
+BORDER_DARK = "#09090B"    # Solid outline
+SHADOW_DARK = "#09090B"    # Hard shadow
 
 COLOR_YELLOW = "#FFE66D"   # Yellow
+COLOR_LIME = "#A3E635"     # Acid Lime
 COLOR_GREEN = "#6BCB77"    # Mint green
-COLOR_BLUE = "#4D96FF"     # Sky blue
+COLOR_BLUE = "#93C5FD"     # Sky blue
 COLOR_PURPLE = "#DDD6FE"   # Lavender
 COLOR_ORANGE = "#FF9F43"   # Orange
 COLOR_WHITE = "#FFFFFF"
@@ -54,8 +55,8 @@ SCENES_DEF = [
         "id": "scene2_checkin",
         "step_tag": "INTERACTIVE CHECK-IN • FUEL GAUGE",
         "headline": "Tactile Micro-Actions &\nReal-Time Fuel Surge",
-        "subtitle": "Tap to check habits. Watch your fuel gauge climb and Dynamic Island pulse.",
-        "badges": ["TACTILE CHECK", "FUEL METER", "LIVE STREAK"],
+        "subtitle": "Tap to check habits. Watch your 12-segment tachometer charge and Dynamic Island pulse.",
+        "badges": ["TACTILE CHECK", "TACHOMETER", "LIVE STREAK"],
         "speech": "Complete your daily protocols with satisfying tactile micro-interactions. As you check off habits, your live fuel meter surges in real time, and the Dynamic Island celebrates your streak momentum.",
         "tab": "protocols",
         "action": "check_habit",
@@ -100,124 +101,143 @@ SCENES_DEF = [
     }
 ]
 
-def draw_neo_box(draw, xy, fill_color, border_color=BORDER_DARK, shadow_color=SHADOW_DARK, offset=6, border_width=3, radius=14):
+def draw_neo_box(draw, xy, fill_color, border_color=BORDER_DARK, shadow_color=SHADOW_DARK, offset=5, border_width=2.5, radius=14):
     x0, y0, x1, y1 = xy
     if offset > 0:
         draw.rounded_rectangle([x0 + offset, y0 + offset, x1 + offset, y1 + offset], radius=radius, fill=shadow_color)
-    draw.rounded_rectangle([x0, y0, x1, y1], radius=radius, fill=fill_color, outline=border_color, width=border_width)
+    draw.rounded_rectangle([x0, y0, x1, y1], radius=radius, fill=fill_color, outline=border_color, width=int(border_width))
 
 def draw_phone_chassis(draw, px, py, pw, ph):
     # Outer device drop-shadow
-    draw.rounded_rectangle([px + 14, py + 18, px + pw + 14, py + ph + 18], radius=48, fill="#020617")
+    draw.rounded_rectangle([px + 14, py + 18, px + pw + 14, py + ph + 18], radius=54, fill="#020617")
     # Outer titanium bezel
-    draw.rounded_rectangle([px, py, px + pw, py + ph], radius=48, fill="#18181B", outline="#27272A", width=4)
+    draw.rounded_rectangle([px, py, px + pw, py + ph], radius=54, fill="#18181B", outline="#27272A", width=4)
+    # Inner bezel
+    draw.rounded_rectangle([px + 4, py + 4, px + pw - 4, py + ph - 4], radius=50, fill="#09090B")
     # Screen boundary
     sx, sy, sw, sh = px + 12, py + 12, pw - 24, ph - 24
-    draw.rounded_rectangle([sx, sy, sx + sw, sy + sh], radius=38, fill=CANVAS_BG, outline=BORDER_DARK, width=3)
+    draw.rounded_rectangle([sx, sy, sx + sw, sy + sh], radius=40, fill=CANVAS_BG, outline=BORDER_DARK, width=3)
+    # Metallic edge highlight
+    draw.rounded_rectangle([px + 2, py + 2, px + pw - 2, py + ph - 2], radius=52, outline="#52525B", width=1)
     return (sx, sy, sw, sh)
 
 def draw_dynamic_island(draw, sx, sy, sw, state, t):
-    # Dynamic Island Pill
     cx = sx + sw // 2
     top_y = sy + 10
 
     if state == "welcome":
-        # Expands slightly with logo
-        w = 200 + int(20 * math.sin(t * 3))
-        h = 32
+        w = 200 + int(15 * math.sin(t * 3))
+        h = 34
         pill_box = [cx - w//2, top_y, cx + w//2, top_y + h]
-        draw.rounded_rectangle(pill_box, radius=16, fill="#09090B")
-        font = get_font(FONT_BOLD, 12)
-        draw.text((cx - 75, top_y + 8), "⚡ HABITO v2 • ONLINE", fill="#FDE047", font=font)
+        draw.rounded_rectangle(pill_box, radius=17, fill="#000000")
+        font = get_font(FONT_BOLD, 11)
+        draw.text((cx - 70, top_y + 9), "⚡ HABITO v2 • ONLINE", fill="#FDE047", font=font)
     elif state == "streak_pulse":
-        # Large expanded notification pill
-        w = 240 + int(10 * math.sin(t * 4))
+        w = 246 + int(10 * math.sin(t * 4))
         h = 36
         pill_box = [cx - w//2, top_y, cx + w//2, top_y + h]
-        draw.rounded_rectangle(pill_box, radius=18, fill="#09090B", outline="#22C55E", width=2)
-        font = get_font(FONT_BOLD, 12)
-        draw.text((cx - 95, top_y + 10), "⚡ FUEL: 75% • +1 STREAK 🔥", fill="#4ADE80", font=font)
+        draw.rounded_rectangle(pill_box, radius=18, fill="#000000", outline=COLOR_LIME, width=2)
+        font = get_font(FONT_BOLD, 11)
+        draw.text((cx - 96, top_y + 10), "⚡ 75% FUEL • +1 STREAK 🔥", fill="#4ADE80", font=font)
     elif state == "audit_active":
-        w = 220
-        h = 32
+        w = 224
+        h = 34
         pill_box = [cx - w//2, top_y, cx + w//2, top_y + h]
-        draw.rounded_rectangle(pill_box, radius=16, fill="#09090B")
-        font = get_font(FONT_BOLD, 12)
-        draw.text((cx - 85, top_y + 8), "📊 88% WEEKLY ADHERENCE", fill="#60A5FA", font=font)
+        draw.rounded_rectangle(pill_box, radius=17, fill="#000000", outline="#60A5FA", width=2)
+        font = get_font(FONT_BOLD, 11)
+        draw.text((cx - 86, top_y + 9), "📊 88% WEEKLY ADHERENCE", fill="#93C5FD", font=font)
     elif state == "vault_locked":
         w = 230 + int(8 * math.sin(t * 3))
         h = 34
         pill_box = [cx - w//2, top_y, cx + w//2, top_y + h]
-        draw.rounded_rectangle(pill_box, radius=17, fill="#09090B", outline="#A855F7", width=2)
-        font = get_font(FONT_BOLD, 12)
-        draw.text((cx - 95, top_y + 9), "🔒 VAULT LOCKED & SALTED", fill="#C084FC", font=font)
+        draw.rounded_rectangle(pill_box, radius=17, fill="#000000", outline="#C084FC", width=2)
+        font = get_font(FONT_BOLD, 11)
+        draw.text((cx - 94, top_y + 9), "🔒 VAULT LOCKED & SALTED", fill="#DDD6FE", font=font)
     else:
-        # Standard compact pill
-        w = 120
-        h = 28
+        w = 126
+        h = 30
         pill_box = [cx - w//2, top_y, cx + w//2, top_y + h]
-        draw.rounded_rectangle(pill_box, radius=14, fill="#09090B")
+        draw.rounded_rectangle(pill_box, radius=15, fill="#000000")
 
-    # Time & Status icons
-    font_time = get_font(FONT_BOLD, 13)
+    # Optical Camera Lens Dot
+    draw.ellipse([cx + w//2 - 20, top_y + 10, cx + w//2 - 10, top_y + 20], fill="#1E293B", outline="#0F172A", width=1)
+    draw.ellipse([cx + w//2 - 17, top_y + 13, cx + w//2 - 13, top_y + 17], fill="#3B82F6")
+
+    # iOS Status Time & Glyphs
+    font_time = get_font(FONT_BOLD, 12)
     draw.text((sx + 24, sy + 14), "9:41", fill=TEXT_DARK, font=font_time)
     draw.text((sx + sw - 60, sy + 14), "5G 85%", fill=TEXT_DARK, font=font_time)
 
 def draw_bottom_nav(draw, sx, sy, sw, sh, active_tab):
     nav_y = sy + sh - 64
-    draw_neo_box(draw, [sx + 14, nav_y, sx + sw - 14, nav_y + 48], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=14)
+    draw_neo_box(draw, [sx + 14, nav_y, sx + sw - 14, nav_y + 48], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=16)
     
     font_nav = get_font(FONT_BOLD, 11)
     tabs = [
-        ("protocols", "⚡ PROTOCOLS", sx + 22, 108),
-        ("audit", "📊 AUDIT", sx + 138, 96),
-        ("sync", "🔄 SYNC", sx + 242, 96)
+        ("protocols", "⚡ PROTOCOLS", sx + 20, 112),
+        ("audit", "📊 AUDIT", sx + 140, 94),
+        ("sync", "🔄 SYNC", sx + 242, 94)
     ]
     for tid, label, bx, bw in tabs:
         if tid == active_tab:
-            draw_neo_box(draw, [bx, nav_y + 5, bx + bw, nav_y + 43], fill_color=BORDER_DARK, offset=0, border_width=1, radius=10)
-            draw.text((bx + 10, nav_y + 14), label, fill=COLOR_WHITE, font=font_nav)
+            draw_neo_box(draw, [bx, nav_y + 5, bx + bw, nav_y + 43], fill_color=BORDER_DARK, offset=0, border_width=1, radius=12)
+            draw.text((bx + 12, nav_y + 14), label, fill=COLOR_WHITE, font=font_nav)
         else:
-            draw.text((bx + 10, nav_y + 14), label, fill=TEXT_DARK, font=font_nav)
+            draw.text((bx + 12, nav_y + 14), label, fill=TEXT_DARK, font=font_nav)
 
-    # Home bar
-    draw.rounded_rectangle([sx + sw//2 - 50, sy + sh - 10, sx + sw//2 + 50, sy + sh - 6], radius=2, fill=BORDER_DARK)
+    # Home indicator bar
+    draw.rounded_rectangle([sx + sw//2 - 50, sy + sh - 9, sx + sw//2 + 50, sy + sh - 5], radius=2, fill=BORDER_DARK)
 
 def draw_screen_protocols(draw, sx, sy, sw, fuel_val, checked_third):
     font_xs = get_font(FONT_REGULAR, 11)
     font_sm_b = get_font(FONT_BOLD, 13)
-    font_base_b = get_font(FONT_BOLD, 16)
+    font_base_b = get_font(FONT_BOLD, 15)
     font_title = get_font(FONT_BOLD, 18)
 
     top_content = sy + 52
 
-    # 1. Profile Bar
-    draw_neo_box(draw, [sx + 14, top_content, sx + sw - 14, top_content + 74], fill_color=COLOR_YELLOW, offset=3, border_width=2, radius=14)
-    draw.ellipse([sx + 24, top_content + 13, sx + 72, top_content + 61], fill=COLOR_PURPLE, outline=BORDER_DARK, width=2)
-    draw.text((sx + 36, top_content + 21), "⚡", fill=TEXT_DARK, font=font_title)
-    draw.text((sx + 84, top_content + 16), "VASUDEV'S PROTOCOLS", fill=TEXT_DARK, font=font_sm_b)
-    draw.text((sx + 84, top_content + 38), "\"Relentless consistency.\"", fill="#444444", font=font_xs)
+    # 1. COMMANDER CALLSIGN PROFILE CARD
+    draw_neo_box(draw, [sx + 14, top_content, sx + sw - 14, top_content + 80], fill_color=COLOR_YELLOW, offset=4, border_width=2.5, radius=16)
+    # Stamped badge top left
+    draw.rounded_rectangle([sx + 24, top_content + 8, sx + 170, top_content + 24], radius=4, fill="#09090B")
+    draw.text((sx + 30, top_content + 10), "★ COMMANDER CALLSIGN", fill="#FFE66D", font=get_font(FONT_BOLD, 9))
 
-    # 2. Fuel Meter
-    fuel_y = top_content + 86
-    draw_neo_box(draw, [sx + 14, fuel_y, sx + sw - 14, fuel_y + 92], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=14)
-    draw.text((sx + 26, fuel_y + 12), "DAILY PROTOCOL FUEL", fill=TEXT_DARK, font=font_sm_b)
-    pct_text = f"{int(fuel_val * 100)}%"
-    draw.text((sx + sw - 68, fuel_y + 10), pct_text, fill="#2563EB", font=font_base_b)
+    # Avatar Badge
+    draw_neo_box(draw, [sx + 24, top_content + 28, sx + 68, top_content + 72], fill_color=COLOR_PURPLE, offset=2, border_width=2, radius=12)
+    draw.text((sx + 36, top_content + 36), "⚡", fill=TEXT_DARK, font=font_title)
+    
+    draw.text((sx + 80, top_content + 30), "VASUDEV SINGH", fill=TEXT_DARK, font=font_base_b)
+    draw.text((sx + 80, top_content + 48), "\"Relentless routine. Zero excuses.\"", fill="#333333", font=font_xs)
+    draw.text((sx + 80, top_content + 64), "LVL 4 DISCIPLINE • 🔥 14D STREAK", fill="#09090B", font=get_font(FONT_BOLD, 9))
 
-    # Track & Bar
-    bar_x, bar_y, bar_w, bar_h = sx + 24, fuel_y + 40, sw - 48, 18
-    draw.rounded_rectangle([bar_x, bar_y, bar_x + bar_w, bar_y + bar_h], radius=9, fill="#F1F5F9", outline=BORDER_DARK, width=2)
-    fill_w = int(bar_w * fuel_val)
-    draw.rounded_rectangle([bar_x, bar_y, bar_x + fill_w, bar_y + bar_h], radius=9, fill=COLOR_GREEN, outline=BORDER_DARK, width=2)
+    # 2. 12-SEGMENT INDUSTRIAL TACHOMETER FUEL METER
+    fuel_y = top_content + 94
+    draw_neo_box(draw, [sx + 14, fuel_y, sx + sw - 14, fuel_y + 98], fill_color=COLOR_WHITE, offset=4, border_width=2.5, radius=16)
+    draw.text((sx + 26, fuel_y + 12), "DAILY MOMENTUM FUEL", fill=TEXT_DARK, font=font_sm_b)
+    
+    pct_text = f"{int(fuel_val * 100)}% GAIN"
+    draw_neo_box(draw, [sx + sw - 100, fuel_y + 8, sx + sw - 24, fuel_y + 32], fill_color=COLOR_LIME, offset=2, border_width=1.5, radius=7)
+    draw.text((sx + sw - 92, fuel_y + 13), pct_text, fill=TEXT_DARK, font=get_font(FONT_BOLD, 11))
 
-    status_txt = f"{3 if checked_third else 2} of 4 protocols completed"
-    draw.text((sx + 26, fuel_y + 68), status_txt, fill="#475569", font=font_xs)
-    draw.text((sx + sw - 120, fuel_y + 68), "⚡ MOMENTUM", fill="#059669", font=font_xs)
+    # 12 Segmented LED Blocks
+    grid_x, grid_y, grid_w, grid_h = sx + 24, fuel_y + 40, sw - 48, 22
+    draw.rounded_rectangle([grid_x, grid_y, grid_x + grid_w, grid_y + grid_h], radius=7, fill="#09090B")
+    
+    num_lit = int(round(fuel_val * 12))
+    seg_w = (grid_w - 24) // 12
+    for s in range(12):
+        bx = grid_x + 4 + s * (seg_w + 1.5)
+        by = grid_y + 3
+        col = COLOR_LIME if s < num_lit else "#1E293B"
+        draw.rounded_rectangle([bx, by, bx + seg_w, by + grid_h - 6], radius=3, fill=col)
 
-    # 3. Protocol Items
-    items_y = fuel_y + 104
-    draw.text((sx + 18, items_y), "ACTIVE PROTOCOLS", fill=TEXT_DARK, font=font_sm_b)
+    status_txt = f"{3 if checked_third else 2} OF 4 PROTOCOLS LOGGED"
+    draw.text((sx + 26, fuel_y + 72), status_txt, fill="#64748B", font=font_xs)
+    draw.text((sx + sw - 150, fuel_y + 72), "🛡️ 2 SHIELDS ACTIVE", fill=TEXT_DARK, font=font_xs)
+
+    # 3. TACTILE ACTIVE PROTOCOLS
+    items_y = fuel_y + 110
+    draw.text((sx + 20, items_y), "TODAY'S DISCIPLINE PROTOCOL", fill="#475569", font=get_font(FONT_BOLD, 10))
 
     items = [
         ("Morning Deep Work (4h)", "Daily • 14d Streak", True, "DAILY"),
@@ -225,58 +245,61 @@ def draw_screen_protocols(draw, sx, sy, sw, fuel_val, checked_third):
         ("Cold Plunge / Mobility", "Weekdays • 5d Streak", checked_third, "WEEKDAYS"),
         ("Evening Digital Detox", "Daily • 21d Streak", False, "DAILY")
     ]
-    curr_y = items_y + 20
+    curr_y = items_y + 18
     for name, sub, done, tag in items:
-        draw_neo_box(draw, [sx + 14, curr_y, sx + sw - 14, curr_y + 54], fill_color=COLOR_WHITE, offset=2, border_width=2, radius=10)
-        # Checkbox
-        cb_col = COLOR_GREEN if done else "#FFFDF0"
-        draw_neo_box(draw, [sx + 24, curr_y + 11, sx + 56, curr_y + 43], fill_color=cb_col, offset=1, border_width=2, radius=7)
+        card_fill = "#FFFDF0" if (not done and name.startswith("Cold")) else COLOR_WHITE
+        draw_neo_box(draw, [sx + 14, curr_y, sx + sw - 14, curr_y + 54], fill_color=card_fill, offset=3, border_width=2, radius=12)
+        
+        # Tactile 3D Box
+        cb_col = COLOR_LIME if done else COLOR_WHITE
+        draw_neo_box(draw, [sx + 24, curr_y + 10, sx + 56, curr_y + 42], fill_color=cb_col, offset=2, border_width=2, radius=8)
         if done:
-            draw.text((sx + 34, curr_y + 14), "✓", fill=TEXT_DARK, font=font_base_b)
+            draw.text((sx + 34, curr_y + 13), "✓", fill=TEXT_DARK, font=font_base_b)
         else:
-            draw.text((sx + 35, curr_y + 14), "○", fill="#999999", font=font_base_b)
+            draw.text((sx + 35, curr_y + 13), "○", fill="#999999", font=font_base_b)
 
         name_col = "#94A3B8" if done else TEXT_DARK
         draw.text((sx + 66, curr_y + 10), name, fill=name_col, font=font_sm_b)
         draw.text((sx + 66, curr_y + 30), sub, fill="#64748B", font=font_xs)
 
         # Tag
-        draw_neo_box(draw, [sx + sw - 86, curr_y + 15, sx + sw - 24, curr_y + 39], fill_color=COLOR_YELLOW if tag=="DAILY" else "#93C5FD", offset=0, border_width=1, radius=5)
+        draw_neo_box(draw, [sx + sw - 86, curr_y + 15, sx + sw - 24, curr_y + 39], fill_color=COLOR_YELLOW if tag=="DAILY" else COLOR_BLUE, offset=0, border_width=1.5, radius=6)
         draw.text((sx + sw - 80, curr_y + 20), tag, fill=TEXT_DARK, font=font_xs)
 
         curr_y += 62
 
     # Add button
-    draw_neo_box(draw, [sx + 14, curr_y, sx + sw - 14, curr_y + 40], fill_color=COLOR_YELLOW, offset=2, border_width=2, radius=10)
-    draw.text((sx + sw//2 - 55, curr_y + 11), "+ ADD PROTOCOL", fill=TEXT_DARK, font=font_sm_b)
+    draw_neo_box(draw, [sx + 14, curr_y, sx + sw - 14, curr_y + 38], fill_color=COLOR_YELLOW, offset=2, border_width=2, radius=12)
+    draw.text((sx + sw//2 - 65, curr_y + 10), "+ CREATE CUSTOM PROTOCOL", fill=TEXT_DARK, font=font_sm_b)
 
 def draw_screen_audit(draw, sx, sy, sw, progress_anim):
     font_xs = get_font(FONT_REGULAR, 11)
     font_sm_b = get_font(FONT_BOLD, 13)
-    font_title = get_font(FONT_BOLD, 18)
     font_large = get_font(FONT_BOLD, 26)
 
     top_content = sy + 52
     draw_neo_box(draw, [sx + 14, top_content, sx + sw - 14, top_content + 56], fill_color=COLOR_YELLOW, offset=3, border_width=2, radius=14)
     draw.text((sx + 26, top_content + 18), "EFFORT AUDIT & METRICS", fill=TEXT_DARK, font=font_sm_b)
+    draw_neo_box(draw, [sx + sw - 104, top_content + 14, sx + sw - 24, top_content + 40], fill_color=COLOR_WHITE, offset=1, border_width=1.5, radius=7)
+    draw.text((sx + sw - 98, top_content + 20), "THIS MONTH", fill=TEXT_DARK, font=get_font(FONT_BOLD, 9))
 
     # 3 Stat Boxes
     stats_y = top_content + 68
     bw = (sw - 44) // 3
     stat_items = [
-        ("14", "CURRENT", COLOR_GREEN),
-        ("21", "RECORD", "#93C5FD"),
+        ("14", "CURRENT", COLOR_LIME),
+        ("21", "RECORD", COLOR_BLUE),
         ("2", "SHIELDS", COLOR_PURPLE)
     ]
     for i, (val, lbl, col) in enumerate(stat_items):
         bx = sx + 14 + i * (bw + 8)
-        draw_neo_box(draw, [bx, stats_y, bx + bw, stats_y + 76], fill_color=col, offset=2, border_width=2, radius=12)
+        draw_neo_box(draw, [bx, stats_y, bx + bw, stats_y + 76], fill_color=col, offset=3, border_width=2, radius=12)
         draw.text((bx + bw//2 - 14, stats_y + 10), val, fill=TEXT_DARK, font=font_large)
         draw.text((bx + bw//2 - 24, stats_y + 46), lbl, fill="#333333", font=font_xs)
 
     # 7-Day Chart Box
     chart_y = stats_y + 90
-    draw_neo_box(draw, [sx + 14, chart_y, sx + sw - 14, chart_y + 196], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=14)
+    draw_neo_box(draw, [sx + 14, chart_y, sx + sw - 14, chart_y + 196], fill_color=COLOR_WHITE, offset=4, border_width=2.5, radius=16)
     draw.text((sx + 26, chart_y + 14), "7-DAY CONSISTENCY AUDIT", fill=TEXT_DARK, font=font_sm_b)
     draw.text((sx + sw - 120, chart_y + 14), "88% ADHERENCE", fill="#059669", font=font_xs)
 
@@ -288,19 +311,19 @@ def draw_screen_audit(draw, sx, sy, sw, progress_anim):
         actual_h = int(h * progress_anim)
         bx = sx + 26 + i * spacing
         by = chart_base_y - actual_h
-        draw.rectangle([bx, by, bx + spacing - 8, chart_base_y], fill=COLOR_GREEN if h > 60 else COLOR_YELLOW, outline=BORDER_DARK, width=2)
+        draw.rectangle([bx, by, bx + spacing - 8, chart_base_y], fill=COLOR_LIME if h > 60 else COLOR_YELLOW, outline=BORDER_DARK, width=2)
         draw.text((bx + (spacing - 8)//2 - 4, chart_base_y + 8), day, fill=TEXT_DARK, font=font_xs)
 
     # Shield Defense Box
     shield_y = chart_y + 210
-    draw_neo_box(draw, [sx + 14, shield_y, sx + sw - 14, shield_y + 70], fill_color=COLOR_PURPLE, offset=2, border_width=2, radius=12)
+    draw_neo_box(draw, [sx + 14, shield_y, sx + sw - 14, shield_y + 70], fill_color=COLOR_PURPLE, offset=3, border_width=2, radius=14)
     draw.text((sx + 26, shield_y + 14), "🛡️ 2 Active Streak Freeze Shields", fill=TEXT_DARK, font=font_sm_b)
     draw.text((sx + 26, shield_y + 38), "Auto-protects streak if a day is skipped", fill="#4B5563", font=font_xs)
 
 def draw_screen_sync(draw, sx, sy, sw, pin_chars, is_locked):
     font_xs = get_font(FONT_REGULAR, 11)
     font_sm_b = get_font(FONT_BOLD, 13)
-    font_base_b = get_font(FONT_BOLD, 16)
+    font_base_b = get_font(FONT_BOLD, 15)
     font_mono_lg = get_font(FONT_MONO, 20)
 
     top_content = sy + 52
@@ -314,7 +337,7 @@ def draw_screen_sync(draw, sx, sy, sw, pin_chars, is_locked):
 
     # Migration Key Card
     key_y = top_content + 76
-    draw_neo_box(draw, [sx + 14, key_y, sx + sw - 14, key_y + 170], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=14)
+    draw_neo_box(draw, [sx + 14, key_y, sx + sw - 14, key_y + 170], fill_color=COLOR_WHITE, offset=4, border_width=2.5, radius=16)
     draw.text((sx + 24, key_y + 14), "DYNAMIC ALPHANUMERIC TOKEN", fill=TEXT_DARK, font=font_sm_b)
 
     draw_neo_box(draw, [sx + 24, key_y + 40, sx + sw - 24, key_y + 92], fill_color=COLOR_YELLOW, offset=2, border_width=2, radius=10)
@@ -326,7 +349,7 @@ def draw_screen_sync(draw, sx, sy, sw, pin_chars, is_locked):
 
     # 4-Digit PIN Card
     pin_y = key_y + 184
-    draw_neo_box(draw, [sx + 14, pin_y, sx + sw - 14, pin_y + 110], fill_color=COLOR_WHITE, offset=3, border_width=2, radius=14)
+    draw_neo_box(draw, [sx + 14, pin_y, sx + sw - 14, pin_y + 110], fill_color=COLOR_WHITE, offset=4, border_width=2.5, radius=16)
     draw.text((sx + 24, pin_y + 14), "DOUBLE-LOCK 4-DIGIT PIN", fill=TEXT_DARK, font=font_sm_b)
 
     # PIN input box
@@ -335,7 +358,7 @@ def draw_screen_sync(draw, sx, sy, sw, pin_chars, is_locked):
     draw.text((sx + 40, pin_y + 46), pin_display, fill=TEXT_DARK, font=font_mono_lg)
 
     # Lock button
-    lock_col = COLOR_GREEN if is_locked else "#E2E8F0"
+    lock_col = COLOR_LIME if is_locked else "#E2E8F0"
     draw_neo_box(draw, [sx + 130, pin_y + 40, sx + sw - 24, pin_y + 78], fill_color=lock_col, offset=2, border_width=2, radius=8)
     lock_txt = "✓ VAULT ENCRYPTED" if is_locked else "LOCK VAULT BACKUP"
     draw.text((sx + 144, pin_y + 50), lock_txt, fill=TEXT_DARK, font=font_sm_b)
@@ -344,25 +367,22 @@ def draw_screen_sync(draw, sx, sy, sw, pin_chars, is_locked):
     draw.text((sx + 24, pin_y + 90), status_pin, fill="#059669" if is_locked else "#64748B", font=font_xs)
 
 def draw_cursor(draw, cx, cy, clicking=False):
-    # Simulated touch pointer
     r = 18 if not clicking else 14
-    outline_col = "#22C55E" if clicking else "#FFFFFF"
+    outline_col = COLOR_LIME if clicking else "#FFFFFF"
     draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill="#1E293B", outline=outline_col, width=3)
     if clicking:
-        # Tap ripple
-        draw.ellipse([cx - 28, cy - 28, cx + 28, cy + 28], outline="#22C55E", width=2)
+        draw.ellipse([cx - 28, cy - 28, cx + 28, cy + 28], outline=COLOR_LIME, width=2)
 
 def render_frame(scene_info, frame_idx, total_frames, output_path):
-    # Studio Canvas 1920 x 1080
     img = Image.new("RGB", (1920, 1080), BG_STUDIO)
     draw = ImageDraw.Draw(img)
 
     t = frame_idx / total_frames if total_frames > 0 else 0
 
-    # Studio Grid Background lines
-    for gx in range(0, 1920, 80):
+    # Studio Grid Background
+    for gx in range(0, 1920, 60):
         draw.line([(gx, 0), (gx, 1080)], fill="#131B2E", width=1)
-    for gy in range(0, 1080, 80):
+    for gy in range(0, 1080, 60):
         draw.line([(0, gy), (1920, gy)], fill="#131B2E", width=1)
 
     font_display = get_font(FONT_BOLD, 46)
@@ -397,7 +417,7 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
 
     # Badges Row
     badge_x = left_x + 40
-    badge_colors = [COLOR_YELLOW, COLOR_GREEN, "#93C5FD"]
+    badge_colors = [COLOR_YELLOW, COLOR_LIME, COLOR_BLUE]
     for i, btext in enumerate(scene_info["badges"]):
         draw_neo_box(draw, [badge_x, left_y + 276, badge_x + 190, left_y + 312], fill_color=badge_colors[i % 3], offset=2, border_width=2, radius=8)
         draw.text((badge_x + 16, left_y + 284), btext, fill=TEXT_DARK, font=font_badge)
@@ -405,8 +425,8 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
 
     # Interactive Action Checklist Cards
     cards_data = [
-        ("Dynamic Island Alerts", "Live pills pulse at the notch showing streaks & fuel updates in real-time.", COLOR_YELLOW),
-        ("Tactile Depress Feedback", "Checkboxes physically depress 2px on tap, filling with mint green checkmark.", COLOR_GREEN),
+        ("Dynamic Island Micro-Feedback", "Live pills pulse at the notch showing streaks & fuel updates in real-time.", COLOR_YELLOW),
+        ("Automotive Tachometer Fuel", "12 industrial LED segments fill with acid lime as momentum builds.", COLOR_LIME),
         ("Collision-Proof Vault", "8-character high entropy token with optional 4-digit PIN prevents data swap.", COLOR_PURPLE),
     ]
     cy = left_y + 346
@@ -436,7 +456,6 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
     px, py, pw, ph = 1270, 124, 460, 810
     sx, sy, sw, sh = draw_phone_chassis(draw, px, py, pw, ph)
 
-    # Dynamic State Calculations based on scene & t
     tab = scene_info["tab"]
     action = scene_info["action"]
     island_state = scene_info["island_state"]
@@ -447,7 +466,6 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
     is_clicking = False
 
     if action == "check_habit":
-        # First half: move pointer to 3rd habit; 2nd half: click and climb fuel
         if t < 0.4:
             interp = t / 0.4
             pointer_pos = (sx + 40, sy + 380 - int(60 * (1 - interp)))
@@ -464,7 +482,6 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
             checked_third = True
 
     elif action == "animate_bars":
-        # Bars grow from 0 to 1
         bar_anim = min(1.0, t * 1.8)
         draw_screen_audit(draw, sx, sy, sw, bar_anim)
 
@@ -485,10 +502,10 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
     # Bottom Nav
     draw_bottom_nav(draw, sx, sy, sw, sh, tab)
 
-    # Dynamic Island rendered on top of screen content
+    # Dynamic Island
     draw_dynamic_island(draw, sx, sy, sw, island_state, t)
 
-    # Render Pointer Cursor if active
+    # Cursor
     if pointer_pos:
         draw_cursor(draw, pointer_pos[0], pointer_pos[1], is_clicking)
 
@@ -497,7 +514,7 @@ def render_frame(scene_info, frame_idx, total_frames, output_path):
     draw.text((96, 970), "HABITO v2.0 • BUILT WITH FLUTTER & DART • NEO-BRUTALIST ARCHITECTURE", fill=TEXT_DARK, font=font_step)
     draw.text((1540, 970), "GITHUB.COM/DEV-VASU/HABITO", fill=TEXT_DARK, font=font_step)
 
-    img.save(output_path, quality=90)
+    img.save(output_path, quality=92)
 
 async def generate_speech(text, output_mp3):
     import edge_tts
@@ -513,7 +530,7 @@ def get_audio_duration(audio_file):
     return float(res.stdout.strip())
 
 async def main():
-    print("=== BUILDING DYNAMIC ANIMATED WALKTHROUGH VIDEO ===")
+    print("=== BUILDING HIGH-CRAFT DYNAMIC ANIMATED VIDEO ===")
     segment_mp4s = []
     fps = 24
 
@@ -527,7 +544,6 @@ async def main():
         total_frames = int(target_duration * fps)
         print(f"  Duration: {target_duration:.2f}s -> {total_frames} animated frames @ {fps}fps")
 
-        # Generate frames
         frames_dir = TEMP_DIR / f"frames_{scene['id']}"
         frames_dir.mkdir(parents=True, exist_ok=True)
 
@@ -535,7 +551,6 @@ async def main():
             frame_img = frames_dir / f"frame_{f_idx:05d}.jpg"
             render_frame(scene, f_idx, total_frames, frame_img)
 
-        # Encode segment with ffmpeg
         segment_mp4 = TEMP_DIR / f"{scene['id']}.mp4"
         cmd = [
             "ffmpeg", "-y",

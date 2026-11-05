@@ -7,147 +7,204 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;900&family=JetBrains+Mono:wght@700;800&family=Bungee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     body { font-family: 'Space Grotesk', sans-serif; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-    .brutal-shadow { box-shadow: 4px 4px 0px #1E1E1E; }
-    .brutal-shadow-sm { box-shadow: 2px 2px 0px #1E1E1E; }
-    .brutal-shadow-lg { box-shadow: 6px 6px 0px #1E1E1E; }
-    .phone-container {
-      width: 440px;
-      height: 920px;
-      border-radius: 46px;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 10px #1E1E1E;
-      position: relative;
+    .font-sans-ui { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .brutal-shadow-xs { box-shadow: 2px 2px 0px #09090B; }
+    .brutal-shadow-sm { box-shadow: 3px 3px 0px #09090B; }
+    .brutal-shadow { box-shadow: 5px 5px 0px #09090B; }
+    .brutal-shadow-lg { box-shadow: 8px 8px 0px #09090B; }
+
+    .iphone-frame {
+      width: 420px;
+      height: 870px;
+      border-radius: 54px;
       background: #FFFDF0;
+      box-shadow: 
+        0 0 0 4px #27272A,
+        0 0 0 10px #09090B,
+        0 30px 90px -20px rgba(0, 0, 0, 0.8),
+        0 0 50px rgba(168, 85, 247, 0.15);
+      position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
+
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .dynamic-island {
+      height: 36px;
+      background: #09090B;
+      border-radius: 20px;
+      border: 2px solid #C084FC;
+      box-shadow: 0 0 20px rgba(192, 132, 252, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+
+    .bg-grid-tech {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-800 antialiased py-10 px-4 flex flex-col items-center justify-center">
+<body class="bg-[#090D16] bg-grid-tech text-slate-100 py-10 px-4 flex flex-col items-center justify-center min-h-screen">
 
   <!-- Header -->
   <div class="text-center mb-6 max-w-xl px-4">
-    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#FFE66D] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-lg text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
-      <i class="fa-solid fa-shield-halved"></i> Identity & Collision-Proof Vault
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#DDD6FE] text-[#09090B] border-2 border-[#09090B] rounded-xl text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
+      <i class="fa-solid fa-shield-halved"></i> Identity &amp; Collision-Proof Vault
     </div>
-    <h1 class="text-3xl font-black text-white tracking-tight">App Logo, Tagline & Security</h1>
-    <p class="text-sm text-slate-400 mt-1">Personalise your name & motto, explore the new brand logo, and test collision-proof migration.</p>
+    <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight">App Logo, Tagline &amp; Security</h1>
+    <p class="text-sm text-slate-400 font-sans-ui mt-1">High-entropy dynamic token, hardware UUID tagging, and optional 4-digit PIN encryption.</p>
   </div>
 
-  <!-- Interactive Phone Frame -->
-  <div class="phone-container border-4 border-[#1E1E1E]">
-    <!-- Status Bar -->
-    <div class="h-10 px-6 flex justify-between items-center text-xs font-black text-[#1E1E1E] z-30 pt-1">
-      <span>9:41</span>
-      <div class="w-24 h-4 bg-[#1E1E1E] rounded-full mx-auto"></div>
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-signal text-xs"></i>
-        <i class="fa-solid fa-wifi text-xs"></i>
-        <i class="fa-solid fa-battery-full text-xs"></i>
+  <!-- Interactive iPhone Chassis -->
+  <div class="iphone-frame">
+    
+    <!-- iOS Status Bar & Dynamic Island -->
+    <div class="h-12 px-7 flex items-center justify-between text-xs font-black text-[#09090B] z-40 pt-1 select-none">
+      <span class="font-bold tracking-tight">9:41</span>
+      
+      <!-- Dynamic Island -->
+      <div class="dynamic-island w-64">
+        <div class="flex items-center gap-1.5 overflow-hidden">
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
+          <span class="text-[11px] font-black text-white font-mono-code tracking-wider">🔒 VAULT LOCKED &amp; SALTED</span>
+        </div>
+        <div class="w-3 h-3 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center">
+          <div class="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 text-xs text-[#09090B]">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <div class="w-5 h-2.5 rounded-sm border border-[#09090B] p-0.5 flex items-center">
+          <div class="h-full w-full bg-[#09090B]"></div>
+        </div>
       </div>
     </div>
 
-    <!-- Screen Content -->
-    <div class="flex-1 px-5 pt-2 pb-6 space-y-3.5 flex flex-col justify-between">
+    <!-- Mobile Screen Content -->
+    <div class="flex-1 overflow-hidden px-5 pt-1 pb-20 space-y-3 select-none flex flex-col justify-between">
 
-      <!-- BRAND LOGO & TAGLINE BANNER -->
-      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex items-center gap-3.5">
-        <div class="w-14 h-14 rounded-xl border-2 border-[#1E1E1E] bg-[#FFE66D] flex items-center justify-center brutal-shadow-sm flex-shrink-0">
-          <i class="fa-solid fa-bolt text-2xl text-[#1E1E1E]"></i>
+      <!-- 1. BRAND LOGO & TAGLINE BANNER -->
+      <div class="bg-white p-3 rounded-2xl border-3 border-[#09090B] brutal-shadow flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl border-2 border-[#09090B] bg-[#FFE66D] flex items-center justify-center brutal-shadow-xs flex-shrink-0">
+          <i class="fa-solid fa-bolt text-xl text-[#09090B]"></i>
         </div>
         <div>
-          <span class="text-[9px] font-black uppercase tracking-widest bg-[#4D96FF] text-white px-2 py-0.5 rounded border border-[#1E1E1E]">OFFICIAL BRAND IDENTITY</span>
-          <h3 class="text-xl font-black text-[#1E1E1E] tracking-tight mt-0.5">HABITO</h3>
-          <p class="text-[11px] font-black text-slate-600">&quot;Relentless Routine. Unstoppable Momentum.&quot;</p>
+          <span class="text-[8px] font-black uppercase tracking-widest bg-[#4D96FF] text-white px-1.5 py-0.5 rounded border border-[#09090B]">OFFICIAL BRAND IDENTITY</span>
+          <h3 class="text-base font-black text-[#09090B] tracking-tight mt-0.5">HABITO</h3>
+          <p class="text-[10px] font-black text-slate-600">&quot;Relentless Routine. Unstoppable Momentum.&quot;</p>
         </div>
       </div>
 
-      <!-- PERSONAL IDENTITY CARD -->
-      <div class="bg-[#FFE66D] p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
+      <!-- 2. USER PROFILE CARD -->
+      <div class="bg-[#FFE66D] p-3 rounded-2xl border-3 border-[#09090B] brutal-shadow space-y-1.5">
         <div class="flex justify-between items-center">
-          <span class="text-[10px] font-black uppercase tracking-wider text-[#1E1E1E]">USER PROFILE</span>
-          <div class="px-2.5 py-0.5 bg-white text-[#1E1E1E] rounded-lg border-2 border-[#1E1E1E] brutal-shadow-sm text-[10px] font-black">
-            <i class="fa-solid fa-pen"></i> EDIT NAME
+          <span class="text-[9px] font-black uppercase tracking-wider text-[#09090B]">USER PROFILE &amp; CALLSIGN</span>
+          <div class="px-2 py-0.5 bg-white text-[#09090B] rounded-md border border-[#09090B] text-[8px] font-black">
+            EDIT
           </div>
         </div>
-        <div class="flex items-center gap-3">
-          <span class="text-3xl">⚡</span>
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">⚡</span>
           <div>
-            <h4 class="text-base font-black text-[#1E1E1E]">VASUDEV'S PROTOCOLS</h4>
-            <p class="text-xs font-bold text-[#1E1E1E]/80">&quot;Relentless consistency. Zero excuses.&quot;</p>
+            <h4 class="text-sm font-black text-[#09090B]">VASUDEV'S PROTOCOLS</h4>
+            <p class="text-[11px] font-bold text-[#09090B]/80">&quot;Relentless consistency. Zero excuses.&quot;</p>
           </div>
         </div>
       </div>
 
-      <!-- COLLISION-PROOF MIGRATION SECURITY BOX -->
-      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2.5">
+      <!-- 3. COLLISION-PROOF MIGRATION SECURITY BOX -->
+      <div class="bg-white p-3 rounded-2xl border-3 border-[#09090B] brutal-shadow space-y-2">
         <div class="flex justify-between items-center">
-          <span class="px-2 py-0.5 bg-[#6BCB77] text-[#1E1E1E] text-[9px] font-black rounded border border-[#1E1E1E]">COLLISION-PROOF ENGINE</span>
-          <span class="text-xs font-black text-[#1E1E1E] flex items-center gap-1">
+          <span class="px-2 py-0.5 bg-[#6BCB77] text-[#09090B] text-[8px] font-black rounded border border-[#09090B]">COLLISION-PROOF ENGINE</span>
+          <span class="text-[10px] font-black text-[#09090B] flex items-center gap-1">
             <i class="fa-solid fa-rotate"></i> REGENERATE
           </span>
         </div>
 
         <div>
-          <h4 class="font-black text-sm text-[#1E1E1E]">Dynamic Alphanumeric Sync Key</h4>
-          <p class="text-[11px] text-slate-500 font-bold">
-            Generated randomly on each session. 2.8 Trillion combinations with unique device UUID.
+          <h4 class="font-black text-xs text-[#09090B]">Dynamic Alphanumeric Sync Key</h4>
+          <p class="text-[10px] text-slate-500 font-bold">
+            2.8 Trillion combinations with unique device UUID hardware salt.
           </p>
         </div>
 
-        <!-- The Code Box -->
-        <div class="bg-[#FFFDF0] p-2.5 rounded-xl border-2 border-[#1E1E1E] flex items-center justify-between">
+        <!-- Token Box -->
+        <div class="bg-[#FFFDF0] p-2 rounded-xl border-2 border-[#09090B] flex items-center justify-between">
           <div>
             <span class="text-[8px] font-black text-slate-400 block tracking-widest uppercase">DYNAMIC TOKEN</span>
-            <span class="font-mono-code text-lg font-black text-[#1E1E1E]">HAB-9K2M-7Q4X</span>
+            <span class="font-mono-code text-base font-black text-[#09090B]">HAB-9K2M-7Q4X</span>
           </div>
-          <div class="px-3 py-1.5 bg-[#FFE66D] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-xl font-black text-xs brutal-shadow-sm">
+          <div class="px-2.5 py-1 bg-[#FFE66D] text-[#09090B] border-2 border-[#09090B] rounded-lg font-black text-xs brutal-shadow-xs">
             COPY
           </div>
         </div>
 
-        <!-- How collision is prevented -->
-        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[10px] font-bold text-slate-600 space-y-0.5">
-          <div class="flex items-center gap-1 text-[#1E1E1E]">
+        <!-- Security Guarantees -->
+        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[9px] font-bold text-slate-600 space-y-0.5">
+          <div class="flex items-center gap-1 text-[#09090B]">
             <i class="fa-solid fa-lock text-emerald-600"></i> <strong>Zero Data Interchange Guarantee:</strong>
           </div>
-          <p>• <strong>High Entropy:</strong> 8 alphanumeric chars ($36^8 \approx 2.8$ Trillion possibilities).</p>
-          <p>• <strong>Device UUID & Salt:</strong> Data is tagged to your unique device ID.</p>
-          <p>• <strong>Optional 4-Digit PIN:</strong> Lock your backup so only your PIN can unlock it.</p>
+          <p>• <strong>High Entropy:</strong> 8 alphanumeric chars ($36^8 \approx 2.8$ Trillion combinations).</p>
+          <p>• <strong>Device UUID & Salt:</strong> Payload tagged to unique hardware fingerprint.</p>
+          <p>• <strong>Single-Use Burn:</strong> Token auto-expires upon successful import on new device.</p>
         </div>
       </div>
 
-      <!-- OPTIONAL PIN LOCK DEMO -->
-      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
-        <span class="px-2 py-0.5 bg-[#4D96FF] text-white text-[9px] font-black rounded border border-[#1E1E1E]">DOUBLE-LOCK SECURITY</span>
-        <h4 class="font-black text-xs text-[#1E1E1E]">Set 4-Digit Vault PIN</h4>
+      <!-- 4. PIN DOUBLE-LOCK CARD -->
+      <div class="bg-white p-3 rounded-2xl border-3 border-[#09090B] brutal-shadow space-y-1.5">
+        <span class="px-2 py-0.5 bg-[#4D96FF] text-white text-[8px] font-black rounded border border-[#09090B]">DOUBLE-LOCK SECURITY</span>
+        <h4 class="font-black text-xs text-[#09090B]">Set 4-Digit Vault PIN</h4>
         <div class="flex gap-2">
-          <div class="w-20 text-center font-mono-code text-sm font-black py-1.5 rounded-xl border-2 border-[#1E1E1E] bg-[#FFFDF0]">
+          <div class="w-18 text-center font-mono-code text-sm font-black py-1 px-3 rounded-xl border-2 border-[#09090B] bg-[#FFFDF0]">
             ••••
           </div>
-          <div class="flex-1 py-1.5 bg-[#6BCB77] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-xl font-black text-xs brutal-shadow-sm text-center flex items-center justify-center">
-            LOCK VAULT BACKUP
+          <div class="flex-1 py-1 bg-[#A3E635] text-[#09090B] border-2 border-[#09090B] rounded-xl font-black text-xs brutal-shadow-xs text-center flex items-center justify-center">
+            ✓ VAULT ENCRYPTED
           </div>
         </div>
-        <p class="text-[9px] font-bold text-slate-500">Unencrypted. Enter PIN to lock exported data.</p>
-      </div>
-
-      <!-- Bottom Navigation Bar (UNCROPPED!) -->
-      <div class="bg-white rounded-2xl border-2 border-[#1E1E1E] brutal-shadow px-4 py-2 flex justify-center items-center">
-        <div class="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-[#1E1E1E] text-white font-black text-xs border-2 border-[#1E1E1E]">
-          <i class="fa-solid fa-shield-halved text-xs"></i> SECURITY &amp; IDENTITY
-        </div>
+        <p class="text-[8px] font-bold text-emerald-700">AES Salted &amp; Encrypted. PIN required to restore.</p>
       </div>
 
     </div>
 
-    <!-- Home Indicator -->
-    <div class="w-32 h-1 bg-[#1E1E1E] rounded-full mx-auto mb-2"></div>
+    <!-- FLOATING DOCK BOTTOM NAVIGATION BAR -->
+    <div class="absolute bottom-3 left-4 right-4 bg-white rounded-3xl border-3 border-[#09090B] brutal-shadow p-2 flex justify-around items-center z-30">
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl text-[#09090B] font-black text-xs">
+        <i class="fa-solid fa-bolt text-xs"></i> PROTOCOLS
+      </div>
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl text-[#09090B] font-black text-xs">
+        <i class="fa-solid fa-chart-simple text-xs"></i> AUDIT
+      </div>
+      <div class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-[#09090B] text-white font-black text-xs border-2 border-[#09090B]">
+        <i class="fa-solid fa-shield-halved text-xs text-purple-400"></i> SYNC
+      </div>
+    </div>
+
+    <!-- iPhone Home Indicator Bar -->
+    <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#09090B] rounded-full z-40"></div>
   </div>
 
 </body>

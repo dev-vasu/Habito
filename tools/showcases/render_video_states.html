@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; background: #000000; margin: 0; padding: 0; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .font-sans-ui { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .brutal-shadow-xs { box-shadow: 2px 2px 0px #09090B; }
+    .brutal-shadow-sm { box-shadow: 3px 3px 0px #09090B; }
+    .brutal-shadow { box-shadow: 5px 5px 0px #09090B; }
+    .brutal-shadow-lg { box-shadow: 8px 8px 0px #09090B; }
+
+    .iphone-device {
+      width: 430px;
+      height: 890px;
+      border-radius: 54px;
+      background: #FFFDF0;
+      box-shadow: 
+        0 0 0 3px #3F3F46,
+        0 0 0 9px #09090B,
+        0 25px 80px -15px rgba(0, 0, 0, 0.9);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .iphone-device::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-start p-8 gap-12">
+
+  <!-- STATE 1: HOME INITIAL (50% Fuel, 3rd pending) -->
+  <div id="state-home-initial" class="iphone-device">
+    <!-- Status Bar & Dynamic Island -->
+    <div class="h-12 px-7 flex items-center justify-between text-xs font-black text-[#09090B] z-40 pt-1">
+      <span class="font-bold">9:41</span>
+      <div class="h-8 w-32 bg-black rounded-full flex items-center justify-between px-3">
+        <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+        <span class="text-[10px] font-black text-white font-mono-code">⚡ 50% FUEL</span>
+        <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs text-[#09090B]">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <div class="w-5 h-2.5 rounded-sm border border-[#09090B] p-0.5"><div class="h-full w-full bg-[#09090B]"></div></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1 px-5 pt-1 pb-20 space-y-3.5 flex flex-col justify-between">
+      <!-- Callsign Card -->
+      <div class="p-3.5 rounded-2xl border-3 border-[#09090B] bg-[#FFE66D] brutal-shadow relative">
+        <div class="flex justify-between items-start mb-1.5">
+          <span class="px-2 py-0.5 bg-[#09090B] text-white rounded-md text-[9px] font-black uppercase tracking-wider">★ COMMANDER CALLSIGN</span>
+          <span class="px-2 py-0.5 bg-white text-[#09090B] border border-[#09090B] rounded-md text-[9px] font-black">EDIT</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-[#DDD6FE] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center text-xl">⚡</div>
+          <div>
+            <h2 class="text-base font-black text-[#09090B] leading-tight">VASUDEV SINGH</h2>
+            <p class="text-[11px] font-bold text-[#09090B]/85 italic">&quot;Relentless routine. Zero excuses.&quot;</p>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="px-1.5 py-0.5 rounded bg-white border border-[#09090B] text-[8px] font-black">LVL 4 DISCIPLINE</span>
+              <span class="text-[9px] font-black text-[#09090B]">🔥 13-DAY STREAK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12-Segment Tachometer (50% lit = 6 blocks) -->
+      <div class="p-3.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-[11px] font-black uppercase tracking-wider text-[#09090B]">DAILY MOMENTUM FUEL</span>
+          <span class="font-mono-code text-xs font-black px-2 py-0.5 bg-[#FFE66D] border border-[#09090B] rounded-md brutal-shadow-xs">50% FUEL</span>
+        </div>
+        <div class="grid grid-cols-12 gap-1 p-1.5 bg-[#09090B] rounded-xl border-2 border-[#09090B]">
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+        </div>
+        <div class="flex justify-between items-center text-[10px] font-black text-slate-500">
+          <span>2 OF 4 PROTOCOLS LOGGED</span>
+          <span class="text-[#09090B]">🛡️ 2 SHIELDS READY</span>
+        </div>
+      </div>
+
+      <!-- Protocols -->
+      <div class="space-y-2">
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#A3E635] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base">✓</div>
+            <div>
+              <h4 class="text-xs font-black line-through text-slate-400">Morning Deep Work (4h)</h4>
+              <p class="text-[9px] font-bold text-slate-400 font-mono-code">🔥 14d STREAK • 95% Adherence</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#A3E635] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base">✓</div>
+            <div>
+              <h4 class="text-xs font-black line-through text-slate-400">Hydration (3.0 Liters)</h4>
+              <p class="text-[9px] font-bold text-slate-400 font-mono-code">🔥 9d STREAK • 8/8 glasses</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+
+        <!-- TARGET PENDING HABIT -->
+        <div class="p-3 rounded-2xl border-3 border-[#09090B] bg-[#FFFDF0] brutal-shadow-lg flex items-center justify-between ring-2 ring-[#09090B]">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-white border-2 border-[#09090B] brutal-shadow-sm flex items-center justify-center font-black text-sm">○</div>
+            <div>
+              <h4 class="text-xs font-black text-[#09090B]">Cold Plunge &amp; Mobility</h4>
+              <p class="text-[9px] font-black text-blue-600 font-mono-code">⚡ TAP TO CONQUER • Weekdays</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#93C5FD] border border-[#09090B] text-[8px] font-black">5/7 TARGET</span>
+        </div>
+
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-white border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base text-slate-400">○</div>
+            <div>
+              <h4 class="text-xs font-black text-[#09090B]">Evening Digital Sunset</h4>
+              <p class="text-[9px] font-bold text-slate-500 font-mono-code">🔥 21d STREAK • Daily</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+      </div>
+
+      <div class="w-full py-2 bg-[#FFE66D] border-2 border-[#09090B] rounded-xl font-black text-xs text-center flex items-center justify-center gap-1.5 brutal-shadow-sm">
+        <i class="fa-solid fa-plus-circle text-xs"></i> CREATE CUSTOM PROTOCOL
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="absolute bottom-3 left-4 right-4 bg-white rounded-3xl border-3 border-[#09090B] brutal-shadow p-2 flex justify-around items-center z-30">
+      <div class="px-4 py-2 rounded-2xl bg-[#09090B] text-white font-black text-xs border border-[#09090B] flex items-center gap-1.5"><i class="fa-solid fa-bolt text-xs text-[#A3E635]"></i> PROTOCOLS</div>
+      <div class="px-3.5 py-2 text-[#09090B] font-black text-xs flex items-center gap-1.5"><i class="fa-solid fa-chart-simple text-xs"></i> AUDIT</div>
+      <div class="px-3.5 py-2 text-[#09090B] font-black text-xs flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-xs"></i> SYNC</div>
+    </div>
+    <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#09090B] rounded-full z-40"></div>
+  </div>
+
+
+  <!-- STATE 2: HOME CHECKED (75% Fuel, Dynamic Island pulse) -->
+  <div id="state-home-checked" class="iphone-device">
+    <!-- Status Bar & EXPANDED Dynamic Island -->
+    <div class="h-12 px-7 flex items-center justify-between text-xs font-black text-[#09090B] z-40 pt-1">
+      <span class="font-bold">9:41</span>
+      <div class="h-9 w-64 bg-black rounded-full flex items-center justify-between px-3.5 border-2 border-[#A3E635] shadow-[0_0_20px_rgba(163,230,53,0.35)]">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-[11px] font-black text-white font-mono-code">⚡ 75% FUEL • 14D STREAK 🔥</span>
+        </div>
+        <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs text-[#09090B]">
+        <i class="fa-solid fa-signal text-[10px]"></i>
+        <i class="fa-solid fa-wifi text-[10px]"></i>
+        <div class="w-5 h-2.5 rounded-sm border border-[#09090B] p-0.5"><div class="h-full w-full bg-[#09090B]"></div></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1 px-5 pt-1 pb-20 space-y-3.5 flex flex-col justify-between">
+      <!-- Callsign Card -->
+      <div class="p-3.5 rounded-2xl border-3 border-[#09090B] bg-[#FFE66D] brutal-shadow relative">
+        <div class="flex justify-between items-start mb-1.5">
+          <span class="px-2 py-0.5 bg-[#09090B] text-white rounded-md text-[9px] font-black uppercase tracking-wider">★ COMMANDER CALLSIGN</span>
+          <span class="px-2 py-0.5 bg-white text-[#09090B] border border-[#09090B] rounded-md text-[9px] font-black">EDIT</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-[#DDD6FE] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center text-xl">⚡</div>
+          <div>
+            <h2 class="text-base font-black text-[#09090B] leading-tight">VASUDEV SINGH</h2>
+            <p class="text-[11px] font-bold text-[#09090B]/85 italic">&quot;Relentless routine. Zero excuses.&quot;</p>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="px-1.5 py-0.5 rounded bg-white border border-[#09090B] text-[8px] font-black">LVL 4 DISCIPLINE</span>
+              <span class="text-[9px] font-black text-[#09090B]">🔥 14-DAY STREAK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12-Segment Tachometer (75% lit = 9 blocks) -->
+      <div class="p-3.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-[11px] font-black uppercase tracking-wider text-[#09090B]">DAILY MOMENTUM FUEL</span>
+          <span class="font-mono-code text-xs font-black px-2 py-0.5 bg-[#A3E635] border border-[#09090B] rounded-md brutal-shadow-xs">75% GAIN</span>
+        </div>
+        <div class="grid grid-cols-12 gap-1 p-1.5 bg-[#09090B] rounded-xl border-2 border-[#09090B]">
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-[#A3E635] border border-black"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+          <div class="h-5 rounded bg-slate-800 border border-slate-700"></div>
+        </div>
+        <div class="flex justify-between items-center text-[10px] font-black text-slate-500">
+          <span>3 OF 4 PROTOCOLS LOGGED</span>
+          <span class="text-[#09090B]">🛡️ 2 SHIELDS ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Protocols with 3rd Checked -->
+      <div class="space-y-2">
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#A3E635] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base">✓</div>
+            <div>
+              <h4 class="text-xs font-black line-through text-slate-400">Morning Deep Work (4h)</h4>
+              <p class="text-[9px] font-bold text-slate-400 font-mono-code">🔥 14d STREAK • 95% Adherence</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#A3E635] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base">✓</div>
+            <div>
+              <h4 class="text-xs font-black line-through text-slate-400">Hydration (3.0 Liters)</h4>
+              <p class="text-[9px] font-bold text-slate-400 font-mono-code">🔥 9d STREAK • 8/8 glasses</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+
+        <!-- 3rd HABIT IS NOW CHECKED WITH MINT GREEN -->
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#A3E635] border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base">✓</div>
+            <div>
+              <h4 class="text-xs font-black line-through text-slate-400">Cold Plunge &amp; Mobility</h4>
+              <p class="text-[9px] font-bold text-slate-400 font-mono-code">🔥 6d STREAK • Weekdays</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#93C5FD] border border-[#09090B] text-[8px] font-black">5/7 TARGET</span>
+        </div>
+
+        <div class="p-2.5 rounded-2xl border-3 border-[#09090B] bg-white brutal-shadow flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-white border-2 border-[#09090B] brutal-shadow-xs flex items-center justify-center font-black text-base text-slate-400">○</div>
+            <div>
+              <h4 class="text-xs font-black text-[#09090B]">Evening Digital Sunset</h4>
+              <p class="text-[9px] font-bold text-slate-500 font-mono-code">🔥 21d STREAK • Daily</p>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-md bg-[#FFE66D] border border-[#09090B] text-[8px] font-black">DAILY</span>
+        </div>
+      </div>
+
+      <div class="w-full py-2 bg-[#FFE66D] border-2 border-[#09090B] rounded-xl font-black text-xs text-center flex items-center justify-center gap-1.5 brutal-shadow-sm">
+        <i class="fa-solid fa-plus-circle text-xs"></i> CREATE CUSTOM PROTOCOL
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="absolute bottom-3 left-4 right-4 bg-white rounded-3xl border-3 border-[#09090B] brutal-shadow p-2 flex justify-around items-center z-30">
+      <div class="px-4 py-2 rounded-2xl bg-[#09090B] text-white font-black text-xs border border-[#09090B] flex items-center gap-1.5"><i class="fa-solid fa-bolt text-xs text-[#A3E635]"></i> PROTOCOLS</div>
+      <div class="px-3.5 py-2 text-[#09090B] font-black text-xs flex items-center gap-1.5"><i class="fa-solid fa-chart-simple text-xs"></i> AUDIT</div>
+      <div class="px-3.5 py-2 text-[#09090B] font-black text-xs flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-xs"></i> SYNC</div>
+    </div>
+    <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#09090B] rounded-full z-40"></div>
+  </div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/habit.dart';
 import '../services/habit_service.dart';
 import '../services/lists.dart';
+import 'transferPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
     final descController = TextEditingController();
     IconData selectedIcon = availableHabitIcons.first.icon;
     Color selectedColor = availableHabitColors.first;
+    HabitFrequency selectedFrequency = HabitFrequency.daily;
 
     showDialog(
       context: context,
@@ -67,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 12),
                     TextField(
                       controller: descController,
                       style: const TextStyle(fontWeight: FontWeight.w600),
@@ -92,7 +94,66 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
+
+                    // Target Frequency Selector
+                    const Text(
+                      'TARGET FREQUENCY',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                        color: NeoBrutalism.black,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: HabitFrequency.values.map((freq) {
+                        final isSelected = selectedFrequency == freq;
+                        return GestureDetector(
+                          onTap: () {
+                            setDialogState(() {
+                              selectedFrequency = freq;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? NeoBrutalism.black
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: NeoBrutalism.black, width: 2),
+                              boxShadow: isSelected
+                                  ? const [
+                                      BoxShadow(
+                                        color: NeoBrutalism.yellow,
+                                        offset: Offset(2, 2),
+                                        blurRadius: 0,
+                                      )
+                                    ]
+                                  : null,
+                            ),
+                            child: Text(
+                              freq.label,
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w900,
+                                color: isSelected
+                                    ? Colors.white
+                                    : NeoBrutalism.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 14),
+
                     const Text(
                       'ICON BADGE',
                       style: TextStyle(
@@ -102,9 +163,9 @@ class _HomePageState extends State<HomePage> {
                         color: NeoBrutalism.black,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     SizedBox(
-                      height: 52,
+                      height: 48,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: availableHabitIcons.length,
@@ -120,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Container(
                               margin: const EdgeInsets.only(right: 8),
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 color: isSelected
                                     ? selectedColor
@@ -143,14 +204,15 @@ class _HomePageState extends State<HomePage> {
                               child: Icon(
                                 item.icon,
                                 color: NeoBrutalism.black,
-                                size: 22,
+                                size: 20,
                               ),
                             ),
                           );
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
+
                     const Text(
                       'CHIP COLOR',
                       style: TextStyle(
@@ -160,9 +222,9 @@ class _HomePageState extends State<HomePage> {
                         color: NeoBrutalism.black,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     SizedBox(
-                      height: 40,
+                      height: 36,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: availableHabitColors.length,
@@ -177,11 +239,11 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Container(
                               margin: const EdgeInsets.only(right: 8),
-                              width: 36,
-                              height: 36,
+                              width: 32,
+                              height: 32,
                               decoration: BoxDecoration(
                                 color: color,
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
                                   color: NeoBrutalism.black,
                                   width: 2,
@@ -198,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: isSelected
                                   ? const Icon(Icons.check,
-                                      color: NeoBrutalism.black, size: 20)
+                                      color: NeoBrutalism.black, size: 18)
                                   : null,
                             ),
                           );
@@ -229,6 +291,7 @@ class _HomePageState extends State<HomePage> {
                       description: descController.text.trim(),
                       icon: selectedIcon,
                       color: selectedColor,
+                      frequency: selectedFrequency,
                     );
                     Navigator.pop(ctx);
                   },
@@ -323,7 +386,6 @@ class _HomePageState extends State<HomePage> {
     final progress = service.todayProgressPercentage;
     final pct = (progress * 100).round();
 
-    // Find best streak
     int highestStreak = 0;
     for (final h in habits) {
       if (h.currentStreak > highestStreak) highestStreak = h.currentStreak;
@@ -356,49 +418,87 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
           children: [
-            // Neo-Brutalist Header
+            // Neo-Brutalist Header with Vault Migration Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: NeoBrutalism.badge(
-                    color: NeoBrutalism.red,
-                    radius: 8,
-                  ),
-                  child: const Text(
-                    'TODAY',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 11,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: NeoBrutalism.badge(
-                    color: NeoBrutalism.blue,
-                    radius: 8,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.local_fire_department,
-                          color: Colors.white, size: 14),
-                      const SizedBox(width: 4),
-                      Text(
-                        '$highestStreak STREAK',
-                        style: const TextStyle(
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
+                      decoration: NeoBrutalism.badge(
+                        color: NeoBrutalism.red,
+                        radius: 8,
+                      ),
+                      child: const Text(
+                        'TODAY',
+                        style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w900,
                           fontSize: 11,
                           letterSpacing: 0.5,
                         ),
                       ),
-                    ],
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
+                      decoration: NeoBrutalism.badge(
+                        color: NeoBrutalism.blue,
+                        radius: 8,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.local_fire_department,
+                              color: Colors.white, size: 14),
+                          const SizedBox(width: 4),
+                          Text(
+                            '$highestStreak STREAK',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 11,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Migration & Transfer Button
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TransferPage()),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 4),
+                    decoration: NeoBrutalism.badge(
+                      color: NeoBrutalism.yellow,
+                      radius: 8,
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.swap_horiz,
+                            size: 16, color: NeoBrutalism.black),
+                        SizedBox(width: 4),
+                        Text(
+                          'SYNC VAULT',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w900,
+                            color: NeoBrutalism.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -466,7 +566,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  // Chunky fuel meter
                   Container(
                     height: 18,
                     padding: const EdgeInsets.all(2),
@@ -617,21 +716,47 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(width: 14),
 
-                        // Title & Subtitle
+                        // Title, Subtitle, & Frequency Badge
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                habit.title,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w900,
-                                  color: NeoBrutalism.black,
-                                  decoration: isDone
-                                      ? TextDecoration.lineThrough
-                                      : null,
-                                ),
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      habit.title,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w900,
+                                        color: NeoBrutalism.black,
+                                        decoration: isDone
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 1),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFEEEEEE),
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color: NeoBrutalism.black,
+                                          width: 1),
+                                    ),
+                                    child: Text(
+                                      habit.frequency.tag,
+                                      style: const TextStyle(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w900,
+                                        color: NeoBrutalism.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(height: 2),
                               Text(
@@ -678,7 +803,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
 
-                        // Actions menu
+                        // Actions Menu
                         PopupMenuButton<String>(
                           icon: const Icon(Icons.more_vert,
                               color: NeoBrutalism.black),
@@ -690,9 +815,40 @@ class _HomePageState extends State<HomePage> {
                           onSelected: (action) {
                             if (action == 'delete') {
                               _showDeleteDialog(context, service, habit);
+                            } else if (action == 'shield') {
+                              service.useStreakShield(habit.id);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: NeoBrutalism.yellow,
+                                  content: Text(
+                                    '🛡️ STREAK SHIELD ACTIVATED FOR TODAY!',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: NeoBrutalism.black,
+                                    ),
+                                  ),
+                                ),
+                              );
                             }
                           },
                           itemBuilder: (context) => [
+                            const PopupMenuItem(
+                              value: 'shield',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.shield,
+                                      size: 16, color: NeoBrutalism.black),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    'USE SHIELD',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w900,
+                                      color: NeoBrutalism.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             const PopupMenuItem(
                               value: 'delete',
                               child: Text(

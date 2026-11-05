@@ -2,13 +2,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/habit.dart';
+import 'backup_service.dart';
 
 class HabitService extends ChangeNotifier {
   static const String _storageKey = 'habito_user_habits_v2';
+  static const String _shieldStorageKey = 'habito_streak_shields_v2';
+
   List<Habit> _habits = [];
+  int _streakShields = 2;
   bool _isLoaded = false;
 
   List<Habit> get habits => List.unmodifiable(_habits);
+  int get streakShields => _streakShields;
   bool get isLoaded => _isLoaded;
 
   HabitService() {
@@ -22,8 +27,9 @@ class HabitService extends ChangeNotifier {
   Future<void> loadHabits() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final jsonString = prefs.getString(_storageKey);
+      _streakShields = prefs.getInt(_shieldStorageKey) ?? 2;
 
+      final jsonString = prefs.getString(_storageKey);
       if (jsonString != null && jsonString.isNotEmpty) {
         final List<dynamic> decoded = jsonDecode(jsonString);
         _habits = decoded
@@ -49,6 +55,7 @@ class HabitService extends ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       final encoded = jsonEncode(_habits.map((h) => h.toJson()).toList());
       await prefs.setString(_storageKey, encoded);
+      await prefs.setInt(_shieldStorageKey, _streakShields);
     } catch (e) {
       debugPrint('Error saving habits: $e');
     }
@@ -58,7 +65,8 @@ class HabitService extends ChangeNotifier {
     required String title,
     required String description,
     required IconData icon,
-    Color color = Colors.deepPurpleAccent,
+    Color color = const Color(0xFF4D96FF),
+    HabitFrequency frequency = HabitFrequency.daily,
   }) async {
     final newHabit = Habit(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -67,8 +75,10 @@ class HabitService extends ChangeNotifier {
       iconCodePoint: icon.codePoint,
       iconFontFamily: icon.fontFamily,
       colorValue: color.value,
+      frequency: frequency,
       createdAt: DateTime.now(),
       history: {},
+      frozenDates: {},
     );
 
     _habits.add(newHabit);
@@ -82,6 +92,7 @@ class HabitService extends ChangeNotifier {
     required String description,
     required IconData icon,
     required Color color,
+    required HabitFrequency frequency,
   }) async {
     final index = _habits.indexWhere((h) => h.id == id);
     if (index != -1) {
@@ -90,6 +101,7 @@ class HabitService extends ChangeNotifier {
       _habits[index].iconCodePoint = icon.codePoint;
       _habits[index].iconFontFamily = icon.fontFamily;
       _habits[index].colorValue = color.value;
+      _habits[index].frequency = frequency;
       notifyListeners();
       await saveHabits();
     }
@@ -102,10 +114,46 @@ class HabitService extends ChangeNotifier {
   }
 
   Future<void> toggleHabit(String id, [DateTime? date]) async {
-    final habit = _habits.firstWhere((h) => h.id == id, orElse: () => throw Exception('Habit not found'));
+    final habit = _habits.firstWhere((h) => h.id == id);
     habit.toggleCompletion(date);
     notifyListeners();
     await saveHabits();
+  }
+
+  /// Applies a Streak Freeze Shield to protect momentum on an inactive day
+  Future<bool> useStreakShield(String habitId, [DateTime? date]) async {
+    if (_streakShields <= 0) return false;
+    final habit = _habits.firstWhere((h) => h.id == habitId, orElse: () => throw Exception('Habit not found'));
+    
+    final targetDate = date ?? DateTime.now();
+    habit.freezeDate(targetDate);
+    _streakShields--;
+    notifyListeners();
+    await saveHabits();
+    return true;
+  }
+
+  // Cross-Device Vault Migration Methods
+  String exportVaultJson() {
+    return BackupService.exportToJson(
+      habits: _habits,
+      streakShields: _streakShields,
+    );
+  }
+
+  String getSyncKey() {
+    return BackupService.generateSyncCode(_habits);
+  }
+
+  Future<bool> restoreVault(String backupJson) async {
+    final payload = BackupService.parseBackup(backupJson);
+    if (payload == null || payload.habits.isEmpty) return false;
+
+    _habits = payload.habits;
+    _streakShields = payload.streakShields;
+    notifyListeners();
+    await saveHabits();
+    return true;
   }
 
   // Analytics & Computed Properties
@@ -121,21 +169,18 @@ class HabitService extends ChangeNotifier {
     return completedTodayCount / totalHabits;
   }
 
-  /// Habits ranked highest by weekly completion rate
   List<Habit> get topHabitsThisWeek {
     final list = List<Habit>.from(_habits);
     list.sort((a, b) => b.weeklyCompletionRate.compareTo(a.weeklyCompletionRate));
     return list;
   }
 
-  /// Habits ranked lowest by weekly completion rate
   List<Habit> get worstHabitsThisWeek {
     final list = List<Habit>.from(_habits);
     list.sort((a, b) => a.weeklyCompletionRate.compareTo(b.weeklyCompletionRate));
     return list;
   }
 
-  /// Total consistency rate across all habits over the last 7 days (0% - 100%)
   int get overallWeeklyPercentage {
     if (_habits.isEmpty) return 0;
     final totalSum = _habits.fold<double>(
@@ -145,7 +190,6 @@ class HabitService extends ChangeNotifier {
     return ((totalSum / _habits.length) * 100).round();
   }
 
-  /// Seed initial habits with some recent activity so new installs have an engaging starting point
   List<Habit> _generateDefaultHabits() {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -167,7 +211,8 @@ class HabitService extends ChangeNotifier {
         iconCodePoint: Icons.local_drink.codePoint,
         iconFontFamily: Icons.local_drink.fontFamily,
         colorValue: 0xFF4D96FF, // NeoBrutalist Blue
-        history: makeHistory([0, 1, 2, 3, 4, 5, 6]), // 100% week
+        frequency: HabitFrequency.daily,
+        history: makeHistory([0, 1, 2, 3, 4, 5, 6]),
       ),
       Habit(
         id: '2',
@@ -176,7 +221,8 @@ class HabitService extends ChangeNotifier {
         iconCodePoint: Icons.menu_book.codePoint,
         iconFontFamily: Icons.menu_book.fontFamily,
         colorValue: 0xFFFF9F43, // NeoBrutalist Orange
-        history: makeHistory([0, 1, 2, 3, 5]), // 71% week
+        frequency: HabitFrequency.weekdays,
+        history: makeHistory([0, 1, 2, 3, 5]),
       ),
       Habit(
         id: '3',
@@ -185,7 +231,8 @@ class HabitService extends ChangeNotifier {
         iconCodePoint: Icons.code.codePoint,
         iconFontFamily: Icons.code.fontFamily,
         colorValue: 0xFF9D4EDD, // NeoBrutalist Purple
-        history: makeHistory([1, 2, 4, 6]), // 57% week
+        frequency: HabitFrequency.weekdays,
+        history: makeHistory([1, 2, 4, 6]),
       ),
       Habit(
         id: '4',
@@ -194,13 +241,13 @@ class HabitService extends ChangeNotifier {
         iconCodePoint: Icons.directions_run.codePoint,
         iconFontFamily: Icons.directions_run.fontFamily,
         colorValue: 0xFF6BCB77, // NeoBrutalist Mint Green
-        history: makeHistory([2, 5]), // 28% week
+        frequency: HabitFrequency.threePerWeek,
+        history: makeHistory([2, 5]),
       ),
     ];
   }
 }
 
-/// An InheritedNotifier so any widget in the tree can access HabitService easily via HabitScope.of(context)
 class HabitScope extends InheritedNotifier<HabitService> {
   const HabitScope({
     Key? key,

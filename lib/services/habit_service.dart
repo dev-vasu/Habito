@@ -2,18 +2,24 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/habit.dart';
+import '../models/user_profile.dart';
 import 'backup_service.dart';
 
 class HabitService extends ChangeNotifier {
   static const String _storageKey = 'habito_user_habits_v2';
   static const String _shieldStorageKey = 'habito_streak_shields_v2';
+  static const String _profileStorageKey = 'habito_user_profile_v2';
 
   List<Habit> _habits = [];
+  UserProfile _profile = UserProfile();
   int _streakShields = 2;
+  String _currentSyncKey = BackupService.generateCollisionProofSyncCode();
   bool _isLoaded = false;
 
   List<Habit> get habits => List.unmodifiable(_habits);
+  UserProfile get profile => _profile;
   int get streakShields => _streakShields;
+  String get currentSyncKey => _currentSyncKey;
   bool get isLoaded => _isLoaded;
 
   HabitService() {
@@ -29,6 +35,13 @@ class HabitService extends ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       _streakShields = prefs.getInt(_shieldStorageKey) ?? 2;
 
+      // Load Profile
+      final profileString = prefs.getString(_profileStorageKey);
+      if (profileString != null && profileString.isNotEmpty) {
+        _profile = UserProfile.fromJson(jsonDecode(profileString));
+      }
+
+      // Load Habits
       final jsonString = prefs.getString(_storageKey);
       if (jsonString != null && jsonString.isNotEmpty) {
         final List<dynamic> decoded = jsonDecode(jsonString);
@@ -56,9 +69,26 @@ class HabitService extends ChangeNotifier {
       final encoded = jsonEncode(_habits.map((h) => h.toJson()).toList());
       await prefs.setString(_storageKey, encoded);
       await prefs.setInt(_shieldStorageKey, _streakShields);
+      await prefs.setString(_profileStorageKey, jsonEncode(_profile.toJson()));
     } catch (e) {
       debugPrint('Error saving habits: $e');
     }
+  }
+
+  Future<void> updateProfile({
+    String? name,
+    String? personalMotto,
+    String? avatarEmoji,
+    Color? accentColor,
+  }) async {
+    _profile = _profile.copyWith(
+      name: name?.trim(),
+      personalMotto: personalMotto?.trim(),
+      avatarEmoji: avatarEmoji,
+      accentColorValue: accentColor?.value,
+    );
+    notifyListeners();
+    await saveHabits();
   }
 
   Future<void> addHabit({
@@ -120,11 +150,11 @@ class HabitService extends ChangeNotifier {
     await saveHabits();
   }
 
-  /// Applies a Streak Freeze Shield to protect momentum on an inactive day
   Future<bool> useStreakShield(String habitId, [DateTime? date]) async {
     if (_streakShields <= 0) return false;
-    final habit = _habits.firstWhere((h) => h.id == habitId, orElse: () => throw Exception('Habit not found'));
-    
+    final habit = _habits.firstWhere((h) => h.id == habitId,
+        orElse: () => throw Exception('Habit not found'));
+
     final targetDate = date ?? DateTime.now();
     habit.freezeDate(targetDate);
     _streakShields--;
@@ -134,23 +164,27 @@ class HabitService extends ChangeNotifier {
   }
 
   // Cross-Device Vault Migration Methods
-  String exportVaultJson() {
+  String exportVaultJson({String? pin}) {
     return BackupService.exportToJson(
       habits: _habits,
       streakShields: _streakShields,
+      profile: _profile,
+      pin: pin,
     );
   }
 
-  String getSyncKey() {
-    return BackupService.generateSyncCode(_habits);
+  void regenerateSyncKey() {
+    _currentSyncKey = BackupService.generateCollisionProofSyncCode();
+    notifyListeners();
   }
 
-  Future<bool> restoreVault(String backupJson) async {
-    final payload = BackupService.parseBackup(backupJson);
+  Future<bool> restoreVault(String backupJson, {String? pin}) async {
+    final payload = BackupService.parseBackup(backupJson, pin: pin);
     if (payload == null || payload.habits.isEmpty) return false;
 
     _habits = payload.habits;
     _streakShields = payload.streakShields;
+    _profile = payload.profile;
     notifyListeners();
     await saveHabits();
     return true;
@@ -171,13 +205,15 @@ class HabitService extends ChangeNotifier {
 
   List<Habit> get topHabitsThisWeek {
     final list = List<Habit>.from(_habits);
-    list.sort((a, b) => b.weeklyCompletionRate.compareTo(a.weeklyCompletionRate));
+    list.sort(
+        (a, b) => b.weeklyCompletionRate.compareTo(a.weeklyCompletionRate));
     return list;
   }
 
   List<Habit> get worstHabitsThisWeek {
     final list = List<Habit>.from(_habits);
-    list.sort((a, b) => a.weeklyCompletionRate.compareTo(b.weeklyCompletionRate));
+    list.sort(
+        (a, b) => a.weeklyCompletionRate.compareTo(b.weeklyCompletionRate));
     return list;
   }
 
@@ -210,7 +246,7 @@ class HabitService extends ChangeNotifier {
         description: 'Drink at least 8 cups of water daily',
         iconCodePoint: Icons.local_drink.codePoint,
         iconFontFamily: Icons.local_drink.fontFamily,
-        colorValue: 0xFF4D96FF, // NeoBrutalist Blue
+        colorValue: 0xFF4D96FF,
         frequency: HabitFrequency.daily,
         history: makeHistory([0, 1, 2, 3, 4, 5, 6]),
       ),
@@ -220,7 +256,7 @@ class HabitService extends ChangeNotifier {
         description: 'Read at least 25 pages without phone',
         iconCodePoint: Icons.menu_book.codePoint,
         iconFontFamily: Icons.menu_book.fontFamily,
-        colorValue: 0xFFFF9F43, // NeoBrutalist Orange
+        colorValue: 0xFFFF9F43,
         frequency: HabitFrequency.weekdays,
         history: makeHistory([0, 1, 2, 3, 5]),
       ),
@@ -230,7 +266,7 @@ class HabitService extends ChangeNotifier {
         description: '2 focused commits or feature builds',
         iconCodePoint: Icons.code.codePoint,
         iconFontFamily: Icons.code.fontFamily,
-        colorValue: 0xFF9D4EDD, // NeoBrutalist Purple
+        colorValue: 0xFF9D4EDD,
         frequency: HabitFrequency.weekdays,
         history: makeHistory([1, 2, 4, 6]),
       ),
@@ -240,7 +276,7 @@ class HabitService extends ChangeNotifier {
         description: '5km run or 30 mins cardio session',
         iconCodePoint: Icons.directions_run.codePoint,
         iconFontFamily: Icons.directions_run.fontFamily,
-        colorValue: 0xFF6BCB77, // NeoBrutalist Mint Green
+        colorValue: 0xFF6BCB77,
         frequency: HabitFrequency.threePerWeek,
         history: makeHistory([2, 5]),
       ),

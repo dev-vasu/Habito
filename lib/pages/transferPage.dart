@@ -13,6 +13,8 @@ class TransferPage extends StatefulWidget {
 class _TransferPageState extends State<TransferPage> {
   bool _isExportMode = true;
   final TextEditingController _restoreInputController = TextEditingController();
+  final TextEditingController _pinController = TextEditingController();
+  final TextEditingController _exportPinController = TextEditingController();
 
   void _copyToClipboard(String text, String message) {
     Clipboard.setData(ClipboardData(text: text));
@@ -34,7 +36,8 @@ class _TransferPageState extends State<TransferPage> {
     final input = _restoreInputController.text.trim();
     if (input.isEmpty) return;
 
-    final success = await service.restoreVault(input);
+    final pin = _pinController.text.trim();
+    final success = await service.restoreVault(input, pin: pin.isNotEmpty ? pin : null);
     if (!mounted) return;
 
     if (success) {
@@ -42,7 +45,7 @@ class _TransferPageState extends State<TransferPage> {
         const SnackBar(
           backgroundColor: NeoBrutalism.green,
           content: Text(
-            '🎉 ALL PROTOCOLS & STREAKS RESTORED SUCCESSFULLY!',
+            '🎉 ALL PROTOCOLS, PROFILE & STREAKS RESTORED SUCCESSFULLY!',
             style: TextStyle(
               fontWeight: FontWeight.w900,
               color: NeoBrutalism.black,
@@ -56,7 +59,7 @@ class _TransferPageState extends State<TransferPage> {
         const SnackBar(
           backgroundColor: NeoBrutalism.red,
           content: Text(
-            'INVALID VAULT DATA. PLEASE VERIFY THE BACKUP CONTENT.',
+            'INVALID DATA OR INCORRECT PIN. PLEASE VERIFY BACKUP.',
             style: TextStyle(
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -70,8 +73,12 @@ class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
     final service = HabitScope.of(context);
-    final syncKey = service.getSyncKey();
-    final vaultJson = service.exportVaultJson();
+    final syncKey = service.currentSyncKey;
+    final vaultJson = service.exportVaultJson(
+      pin: _exportPinController.text.trim().isNotEmpty
+          ? _exportPinController.text.trim()
+          : null,
+    );
 
     return Scaffold(
       backgroundColor: NeoBrutalism.background,
@@ -83,7 +90,7 @@ class _TransferPageState extends State<TransferPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
-          'VAULT MIGRATION',
+          'VAULT MIGRATION & SYNC',
           style: TextStyle(
             color: NeoBrutalism.black,
             fontWeight: FontWeight.w900,
@@ -166,7 +173,42 @@ class _TransferPageState extends State<TransferPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
+
+            // Collision-Proof Guarantee Badge
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: NeoBrutalism.black, width: 2),
+                boxShadow: const [
+                  BoxShadow(
+                    color: NeoBrutalism.black,
+                    offset: Offset(2, 2),
+                    blurRadius: 0,
+                  )
+                ],
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.verified_user,
+                      color: NeoBrutalism.green, size: 22),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      'COLLISION-PROOF VAULT: 2.8 Trillion combinations with unique device UUID. Data cannot mix between users.',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        color: NeoBrutalism.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
 
             if (_isExportMode) ...[
               // EXPORT SECTION
@@ -181,23 +223,49 @@ class _TransferPageState extends State<TransferPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
-                      decoration: NeoBrutalism.badge(
-                          color: NeoBrutalism.red, radius: 6),
-                      child: const Text(
-                        'METHOD 1: INSTANT SYNC KEY',
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
+                          decoration: NeoBrutalism.badge(
+                              color: NeoBrutalism.red, radius: 6),
+                          child: const Text(
+                            'DYNAMIC SYNC TOKEN',
+                            style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            service.regenerateSyncKey();
+                            setState(() {});
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(Icons.refresh,
+                                  size: 14, color: NeoBrutalism.black),
+                              SizedBox(width: 2),
+                              Text(
+                                'NEW CODE',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w900,
+                                  color: NeoBrutalism.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Your 6-Digit Transfer Key',
+                      'High-Entropy Sync Key',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
@@ -206,19 +274,19 @@ class _TransferPageState extends State<TransferPage> {
                     ),
                     const SizedBox(height: 2),
                     const Text(
-                      'Type or copy this code on your new device.',
+                      'Generated uniquely for this session. Safe from collisions.',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF666666),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 12),
 
                     // Code Display Box
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                          horizontal: 14, vertical: 12),
                       decoration: BoxDecoration(
                         color: NeoBrutalism.background,
                         borderRadius: BorderRadius.circular(14),
@@ -232,10 +300,10 @@ class _TransferPageState extends State<TransferPage> {
                             syncKey,
                             style: const TextStyle(
                               fontFamily: 'monospace',
-                              fontSize: 24,
+                              fontSize: 18,
                               fontWeight: FontWeight.w900,
                               color: NeoBrutalism.black,
-                              letterSpacing: 2,
+                              letterSpacing: 1.5,
                             ),
                           ),
                           GestureDetector(
@@ -243,17 +311,17 @@ class _TransferPageState extends State<TransferPage> {
                                 syncKey, 'Sync Key copied!'),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
+                                  horizontal: 12, vertical: 6),
                               decoration: NeoBrutalism.box(
                                 backgroundColor: NeoBrutalism.yellow,
-                                radius: 10,
-                                borderWidth: 2,
+                                radius: 8,
+                                borderWidth: 1.5,
                                 shadowOffset: const Offset(2, 2),
                               ),
                               child: const Text(
                                 'COPY',
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.w900,
                                   color: NeoBrutalism.black,
                                 ),
@@ -268,7 +336,7 @@ class _TransferPageState extends State<TransferPage> {
               ),
               const SizedBox(height: 16),
 
-              // Full Vault JSON Export
+              // Full Vault JSON Export with Optional PIN
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: NeoBrutalism.box(
@@ -284,19 +352,19 @@ class _TransferPageState extends State<TransferPage> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 3),
                       decoration: NeoBrutalism.badge(
-                          color: NeoBrutalism.green, radius: 6),
+                          color: NeoBrutalism.blue, radius: 6),
                       child: const Text(
-                        'METHOD 2: ZERO-CLOUD FILE VAULT',
+                        'ZERO-CLOUD DIRECT VAULT FILE',
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.w900,
-                          color: NeoBrutalism.black,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Full Encrypted Vault Backup',
+                      'Export Encrypted Payload',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
@@ -305,14 +373,41 @@ class _TransferPageState extends State<TransferPage> {
                     ),
                     const SizedBox(height: 2),
                     const Text(
-                      'Copy entire JSON record to share via AirDrop, Drive, or messaging.',
+                      'Optional: Lock backup with a 4-digit PIN for double security.',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF666666),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 10),
+
+                    TextField(
+                      controller: _exportPinController,
+                      keyboardType: TextInputType.number,
+                      maxLength: 4,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        counterText: '',
+                        filled: true,
+                        fillColor: NeoBrutalism.background,
+                        labelText: 'Optional 4-Digit Security PIN',
+                        labelStyle: const TextStyle(
+                            fontSize: 11, fontWeight: FontWeight.bold),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2),
+                        ),
+                      ),
+                      onChanged: (_) => setState(() {}),
+                    ),
+                    const SizedBox(height: 10),
 
                     GestureDetector(
                       onTap: () => _copyToClipboard(
@@ -327,7 +422,7 @@ class _TransferPageState extends State<TransferPage> {
                           shadowOffset: const Offset(3, 3),
                         ),
                         child: const Text(
-                          'COPY VAULT BACKUP PAYLOAD',
+                          'COPY SECURE VAULT PAYLOAD',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 12,
@@ -360,7 +455,7 @@ class _TransferPageState extends State<TransferPage> {
                       decoration: NeoBrutalism.badge(
                           color: NeoBrutalism.green, radius: 6),
                       child: const Text(
-                        'RESTORE PROGRESS',
+                        'RESTORE PROGRESS ON NEW DEVICE',
                         style: TextStyle(
                           fontSize: 9,
                           fontWeight: FontWeight.w900,
@@ -370,7 +465,7 @@ class _TransferPageState extends State<TransferPage> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Paste Vault Payload or Key',
+                      'Paste Vault Backup Payload',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
@@ -379,21 +474,21 @@ class _TransferPageState extends State<TransferPage> {
                     ),
                     const SizedBox(height: 2),
                     const Text(
-                      'Paste the exported JSON backup from your previous phone below.',
+                      'Paste the exported JSON backup from your previous phone.',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF666666),
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 12),
 
                     TextField(
                       controller: _restoreInputController,
-                      maxLines: 5,
+                      maxLines: 4,
                       style: const TextStyle(
                         fontFamily: 'monospace',
-                        fontSize: 12,
+                        fontSize: 11,
                         fontWeight: FontWeight.bold,
                       ),
                       decoration: InputDecoration(
@@ -401,18 +496,44 @@ class _TransferPageState extends State<TransferPage> {
                         fillColor: NeoBrutalism.background,
                         hintText: 'Paste Vault JSON content here...',
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
                               color: NeoBrutalism.black, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(12),
                           borderSide: const BorderSide(
                               color: NeoBrutalism.black, width: 2.5),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
+
+                    TextField(
+                      controller: _pinController,
+                      keyboardType: TextInputType.number,
+                      maxLength: 4,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        counterText: '',
+                        filled: true,
+                        fillColor: NeoBrutalism.background,
+                        labelText: 'PIN (Leave blank if none was set)',
+                        labelStyle: const TextStyle(
+                            fontSize: 11, fontWeight: FontWeight.bold),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 1.5),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
 
                     GestureDetector(
                       onTap: () => _handleRestore(service),
@@ -426,7 +547,7 @@ class _TransferPageState extends State<TransferPage> {
                           shadowOffset: const Offset(3, 3),
                         ),
                         child: const Text(
-                          'RESTORE MY PROTOCOLS & STREAKS',
+                          'RESTORE MY HABITS & MOMENTUM',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 12,
@@ -441,56 +562,6 @@ class _TransferPageState extends State<TransferPage> {
                 ),
               ),
             ],
-
-            const SizedBox(height: 20),
-
-            // Streak Shields Inventory Box
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: NeoBrutalism.box(
-                backgroundColor: NeoBrutalism.yellow,
-                radius: 20,
-                borderWidth: 2.5,
-                shadowOffset: const Offset(4, 4),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: NeoBrutalism.badge(
-                      color: Colors.white,
-                      radius: 12,
-                    ),
-                    child: const Icon(Icons.shield,
-                        color: NeoBrutalism.black, size: 24),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'STREAK FREEZE SHIELDS',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w900,
-                            color: NeoBrutalism.black,
-                          ),
-                        ),
-                        Text(
-                          '${service.streakShields} tokens remaining this month. Auto-protects streaks if you miss a day.',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                            color: NeoBrutalism.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

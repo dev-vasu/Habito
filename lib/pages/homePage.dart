@@ -12,6 +12,184 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void _showProfileModal(BuildContext context, HabitService service) {
+    final nameController = TextEditingController(text: service.profile.name);
+    final mottoController =
+        TextEditingController(text: service.profile.personalMotto);
+    String selectedEmoji = service.profile.avatarEmoji;
+    const emojis = ['⚡', '🥋', '🚀', '🧠', '🐺', '🦁', '👑', '🔥', '🏆', '💎'];
+
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return StatefulBuilder(
+          builder: (dialogContext, setDialogState) {
+            return AlertDialog(
+              backgroundColor: NeoBrutalism.background,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+                side: const BorderSide(color: NeoBrutalism.black, width: 3),
+              ),
+              title: const Text(
+                'YOUR IDENTITY & MOTTO',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16,
+                  letterSpacing: 0.5,
+                  color: NeoBrutalism.black,
+                ),
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      controller: nameController,
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        labelText: 'Your Name',
+                        labelStyle: const TextStyle(
+                          color: NeoBrutalism.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2.5),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: mottoController,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        labelText: 'Personal Motto / Tagline',
+                        labelStyle: const TextStyle(
+                          color: NeoBrutalism.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(
+                              color: NeoBrutalism.black, width: 2.5),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    const Text(
+                      'PERSONA BADGE',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.5,
+                        color: NeoBrutalism.black,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: emojis.map((em) {
+                        final isSelected = selectedEmoji == em;
+                        return GestureDetector(
+                          onTap: () {
+                            setDialogState(() {
+                              selectedEmoji = em;
+                            });
+                          },
+                          child: Container(
+                            width: 38,
+                            height: 38,
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? NeoBrutalism.yellow
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  color: NeoBrutalism.black, width: 2),
+                              boxShadow: isSelected
+                                  ? const [
+                                      BoxShadow(
+                                        color: NeoBrutalism.black,
+                                        offset: Offset(2, 2),
+                                        blurRadius: 0,
+                                      )
+                                    ]
+                                  : null,
+                            ),
+                            child: Center(
+                              child: Text(
+                                em,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text('CANCEL',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: NeoBrutalism.black)),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    service.updateProfile(
+                      name: nameController.text.trim(),
+                      personalMotto: mottoController.text.trim(),
+                      avatarEmoji: selectedEmoji,
+                    );
+                    Navigator.pop(ctx);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 8),
+                    decoration: NeoBrutalism.box(
+                      backgroundColor: NeoBrutalism.green,
+                      radius: 10,
+                      borderWidth: 2,
+                      shadowOffset: const Offset(2, 2),
+                    ),
+                    child: const Text(
+                      'SAVE PROFILE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 12,
+                        color: NeoBrutalism.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   void _showAddHabitDialog(BuildContext context, HabitService service) {
     final titleController = TextEditingController();
     final descController = TextEditingController();
@@ -380,6 +558,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final service = HabitScope.of(context);
+    final profile = service.profile;
     final habits = service.habits;
     final total = service.totalHabits;
     final remaining = service.remainingTodayCount;
@@ -418,33 +597,49 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
           children: [
-            // Neo-Brutalist Header with Vault Migration Button
+            // Top Bar: Profile Badge & Sync Vault Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Personalized Avatar Badge (Tappable to customize name & motto!)
+                GestureDetector(
+                  onTap: () => _showProfileModal(context, service),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: NeoBrutalism.box(
+                      backgroundColor: Colors.white,
+                      radius: 12,
+                      borderWidth: 2,
+                      shadowOffset: const Offset(2, 2),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          profile.avatarEmoji,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          profile.name.toUpperCase(),
+                          style: const TextStyle(
+                            color: NeoBrutalism.black,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 11,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 Row(
                   children: [
+                    // Streak Badge
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
-                      decoration: NeoBrutalism.badge(
-                        color: NeoBrutalism.red,
-                        radius: 8,
-                      ),
-                      child: const Text(
-                        'TODAY',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 11,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
+                          horizontal: 8, vertical: 4),
                       decoration: NeoBrutalism.badge(
                         color: NeoBrutalism.blue,
                         radius: 8,
@@ -466,50 +661,52 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-                // Migration & Transfer Button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TransferPage()),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
-                    decoration: NeoBrutalism.badge(
-                      color: NeoBrutalism.yellow,
-                      radius: 8,
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.swap_horiz,
-                            size: 16, color: NeoBrutalism.black),
-                        SizedBox(width: 4),
-                        Text(
-                          'SYNC VAULT',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w900,
-                            color: NeoBrutalism.black,
-                          ),
+                    const SizedBox(width: 8),
+
+                    // Migration / Vault Button
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TransferPage()),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
+                        decoration: NeoBrutalism.badge(
+                          color: NeoBrutalism.yellow,
+                          radius: 8,
                         ),
-                      ],
+                        child: const Row(
+                          children: [
+                            Icon(Icons.swap_horiz,
+                                size: 16, color: NeoBrutalism.black),
+                            SizedBox(width: 4),
+                            Text(
+                              'SYNC',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                                color: NeoBrutalism.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
             const SizedBox(height: 16),
 
-            // Big Bold Title
-            const Text(
-              'DO THE THING.',
-              style: TextStyle(
-                fontSize: 34,
+            // Big Bold Title & Personalized Motto
+            Text(
+              'DO THE THING, ${profile.name.toUpperCase()}.',
+              style: const TextStyle(
+                fontSize: 30,
                 fontWeight: FontWeight.w900,
                 color: NeoBrutalism.black,
                 letterSpacing: -1,
@@ -518,11 +715,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 4),
             Text(
-              total == 0
-                  ? 'Add your first target protocol below.'
-                  : remaining == 0
-                      ? 'Target crushed. 100% completed today!'
-                      : 'Show up, check the box, conquer the day.',
+              profile.personalMotto,
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,

@@ -162,38 +162,38 @@ class HabitService extends ChangeNotifier {
     return [
       Habit(
         id: '1',
-        title: 'Drink Water',
+        title: 'Hydrate 2.5L',
         description: 'Drink at least 8 cups of water daily',
         iconCodePoint: Icons.local_drink.codePoint,
         iconFontFamily: Icons.local_drink.fontFamily,
-        colorValue: Colors.blueAccent.value,
+        colorValue: 0xFF4D96FF, // NeoBrutalist Blue
         history: makeHistory([0, 1, 2, 3, 4, 5, 6]), // 100% week
       ),
       Habit(
         id: '2',
-        title: 'Read Books',
-        description: 'Read at least 25 pages of a book',
+        title: 'Deep Reading',
+        description: 'Read at least 25 pages without phone',
         iconCodePoint: Icons.menu_book.codePoint,
         iconFontFamily: Icons.menu_book.fontFamily,
-        colorValue: Colors.orangeAccent.value,
+        colorValue: 0xFFFF9F43, // NeoBrutalist Orange
         history: makeHistory([0, 1, 2, 3, 5]), // 71% week
       ),
       Habit(
         id: '3',
-        title: 'Work on Code',
-        description: 'Practice programming or work on projects',
+        title: 'Ship Code',
+        description: '2 focused commits or feature builds',
         iconCodePoint: Icons.code.codePoint,
         iconFontFamily: Icons.code.fontFamily,
-        colorValue: Colors.deepPurpleAccent.value,
+        colorValue: 0xFF9D4EDD, // NeoBrutalist Purple
         history: makeHistory([1, 2, 4, 6]), // 57% week
       ),
       Habit(
         id: '4',
-        title: 'Exercise & Cardio',
-        description: 'Go to the gym or do 30 mins cardio',
-        iconCodePoint: Icons.fitness_center.codePoint,
-        iconFontFamily: Icons.fitness_center.fontFamily,
-        colorValue: Colors.teal.value,
+        title: 'Cardio / Run',
+        description: '5km run or 30 mins cardio session',
+        iconCodePoint: Icons.directions_run.codePoint,
+        iconFontFamily: Icons.directions_run.fontFamily,
+        colorValue: 0xFF6BCB77, // NeoBrutalist Mint Green
         history: makeHistory([2, 5]), // 28% week
       ),
     ];

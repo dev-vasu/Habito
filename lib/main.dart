@@ -3,6 +3,7 @@ import 'pages/habitsPage.dart';
 import 'pages/homePage.dart';
 import 'pages/progressPage.dart';
 import 'services/habit_service.dart';
+import 'services/lists.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +26,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          primary: Colors.deepPurple,
+        scaffoldBackgroundColor: NeoBrutalism.background,
+        colorScheme: const ColorScheme.light(
+          primary: NeoBrutalism.black,
+          secondary: NeoBrutalism.yellow,
+          background: NeoBrutalism.background,
+          surface: NeoBrutalism.surface,
+          onPrimary: Colors.white,
+          onSurface: NeoBrutalism.black,
         ),
-        scaffoldBackgroundColor: Colors.grey[100],
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: NeoBrutalism.background,
           elevation: 0,
         ),
       ),
@@ -72,44 +77,77 @@ class _NavigationScreenState extends State<NavigationScreen> {
         index: _currentIndex,
         children: _screens,
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: NeoBrutalism.box(
+            backgroundColor: Colors.white,
+            radius: 24,
+            borderWidth: 2.5,
+            shadowOffset: const Offset(3, 3),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(0, Icons.bolt, 'HOME'),
+              _buildNavItem(1, Icons.pie_chart, 'PROGRESS'),
+              _buildNavItem(2, Icons.trending_up, 'TRENDS'),
+            ],
+          ),
         ),
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          unselectedItemColor: Colors.grey[500],
-          selectedItemColor: Colors.deepPurpleAccent,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: "Home",
+      ),
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData icon, String label) {
+    final isSelected = _currentIndex == index;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: isSelected
+            ? BoxDecoration(
+                color: NeoBrutalism.black,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: NeoBrutalism.black, width: 2),
+                boxShadow: const [
+                  BoxShadow(
+                    color: NeoBrutalism.yellow,
+                    offset: Offset(2, 2),
+                    blurRadius: 0,
+                  )
+                ],
+              )
+            : BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(16),
+              ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 18,
+              color: isSelected ? Colors.white : NeoBrutalism.black,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.insights_outlined),
-              activeIcon: Icon(Icons.insights),
-              label: "Progress",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart_outlined),
-              activeIcon: Icon(Icons.show_chart),
-              label: "Trends",
-            ),
+            if (isSelected) ...[
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 12,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/chartsBuilder.dart';
 import '../services/habit_service.dart';
+import '../services/lists.dart';
 
 class Habitspage extends StatefulWidget {
   const Habitspage({Key? key}) : super(key: key);
@@ -16,122 +17,95 @@ class _HabitspageState extends State<Habitspage> {
     final habits = service.habits;
 
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: CustomScrollView(
-        slivers: [
-          // Banner Sliver
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      'assets/habbg.jpeg',
-                      width: double.infinity,
-                      height: 230,
-                      fit: BoxFit.cover,
+      backgroundColor: NeoBrutalism.background,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+          children: [
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: NeoBrutalism.badge(
+                    color: NeoBrutalism.blue,
+                    radius: 8,
+                  ),
+                  child: const Text(
+                    'TRENDS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 11,
+                      letterSpacing: 0.5,
                     ),
-                    Container(
-                      height: 230,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.black.withOpacity(0.5),
-                            Colors.black.withOpacity(0.2),
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 24,
-                      left: 20,
-                      right: 20,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "Habit Trends 📈",
-                            style: TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            "7-day performance charts for each habit",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Dynamic Chart List or Empty State
-          if (habits.isEmpty)
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.show_chart,
-                        size: 64,
-                        color: Colors.grey[400],
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "No Trend Data Yet",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        "Create habits on the Home tab to see dynamic 7-day consistency graphs here.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
                   ),
                 ),
+                Text(
+                  '${habits.length} METRICS',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 13,
+                    color: NeoBrutalism.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            const Text(
+              'MOMENTUM LOGS.',
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.w900,
+                color: NeoBrutalism.black,
+                letterSpacing: -1,
+                height: 1.1,
               ),
-            )
-          else
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              '7-day performance charts for each active protocol.',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF666666),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            if (habits.isEmpty)
+              Container(
+                padding: const EdgeInsets.all(32),
+                decoration: NeoBrutalism.box(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  shadowOffset: const Offset(4, 4),
+                ),
+                child: const Center(
+                  child: Text(
+                    'NO ACTIVE PROTOCOLS FOUND',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      color: NeoBrutalism.black,
+                    ),
+                  ),
+                ),
+              )
+            else
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: habits.length,
+                itemBuilder: (context, index) {
                   final habit = habits[index];
                   return HabitChartCard(habit: habit);
                 },
-                childCount: habits.length,
               ),
-            ),
-
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 24),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

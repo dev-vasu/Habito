@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../services/chartsBuilder.dart';
+import '../services/habit_service.dart';
+import '../services/lists.dart';
 
 class Habitspage extends StatefulWidget {
   const Habitspage({Key? key}) : super(key: key);
@@ -12,71 +13,100 @@ class Habitspage extends StatefulWidget {
 class _HabitspageState extends State<Habitspage> {
   @override
   Widget build(BuildContext context) {
+    final service = HabitScope.of(context);
+    final habits = service.habits;
+
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Column(children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Stack(children: [
-              Image.asset('assets/habbg.jpeg'),
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 140, 0, 20),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(children: const [
-                    Text(
-                      "Your Habits",
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+      backgroundColor: NeoBrutalism.background,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+          children: [
+            // Header
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: NeoBrutalism.badge(
+                    color: NeoBrutalism.blue,
+                    radius: 8,
+                  ),
+                  child: const Text(
+                    'TRENDS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 11,
+                      letterSpacing: 0.5,
                     ),
-                    SizedBox(
-                      height: 5,
+                  ),
+                ),
+                Text(
+                  '${habits.length} METRICS',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 13,
+                    color: NeoBrutalism.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            const Text(
+              'MOMENTUM LOGS.',
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.w900,
+                color: NeoBrutalism.black,
+                letterSpacing: -1,
+                height: 1.1,
+              ),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              '7-day performance charts for each active protocol.',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF666666),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            if (habits.isEmpty)
+              Container(
+                padding: const EdgeInsets.all(32),
+                decoration: NeoBrutalism.box(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  shadowOffset: const Offset(4, 4),
+                ),
+                child: const Center(
+                  child: Text(
+                    'NO ACTIVE PROTOCOLS FOUND',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      color: NeoBrutalism.black,
                     ),
-                    Text(
-                      "Use this to be inspired",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ),
-                  ]),
+                  ),
                 ),
               )
-            ]),
-          ),
+            else
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: habits.length,
+                itemBuilder: (context, index) {
+                  final habit = habits[index];
+                  return HabitChartCard(habit: habit);
+                },
+              ),
+          ],
         ),
-        Container(
-          height: 513,
-          child: ListView(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            // ignore: prefer_const_literals_to_create_immutables
-            children: [
-              SizedBox(
-                height: 200,
-                child: LineChartSample1(),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 200,
-                child: LineChartSample2(),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 200,
-                child: LineChartSample3(),
-              )
-            ],
-          ),
-        )
-      ]),
+      ),
     );
   }
 }

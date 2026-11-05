@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Neo-Brutalist Hard Shadow -->
+  <rect x="36" y="36" width="456" height="456" rx="48" fill="#1E1E1E"/>
+  
+  <!-- Outer Box (Cream Butter) -->
+  <rect x="20" y="20" width="456" height="456" rx="48" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="12"/>
+
+  <!-- Inner Sunflower Badge -->
+  <rect x="56" y="56" width="384" height="260" rx="32" fill="#FFE66D" stroke="#1E1E1E" stroke-width="10"/>
+
+  <!-- Lightning Bolt + Check Icon Hybrid -->
+  <!-- Hard Shadow for Bolt -->
+  <polygon points="266,74 154,204 246,204 214,298 334,168 244,168" fill="#1E1E1E"/>
+  <!-- Main Bolt (Mint Green #6BCB77) -->
+  <polygon points="256,66 144,196 236,196 204,290 324,160 234,160" fill="#6BCB77" stroke="#1E1E1E" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Checkmark Accents -->
+  <path d="M110,240 L160,285 L280,135" fill="none" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(10, 5)"/>
+  <path d="M110,240 L160,285 L280,135" fill="none" stroke="#FF6B6B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Habito Bold Wordmark -->
+  <text x="248" y="380" font-family="'Space Grotesk', Impact, sans-serif" font-weight="900" font-size="58" fill="#1E1E1E" text-anchor="middle" letter-spacing="4">HABITO</text>
+
+  <!-- Tagline Badge -->
+  <g transform="translate(106, 404)">
+    <rect x="0" y="0" width="284" height="40" rx="10" fill="#4D96FF" stroke="#1E1E1E" stroke-width="4"/>
+    <text x="142" y="26" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">RELENTLESS ROUTINE</text>
+  </g>
+</svg>

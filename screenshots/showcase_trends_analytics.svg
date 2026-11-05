@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&amp;family=JetBrains+Mono:wght@700&amp;display=swap');
+      .font-sans { font-family: 'Space Grotesk', -apple-system, sans-serif; }
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="640" fill="#14131A" rx="24"/>
+  <rect x="12" y="12" width="1176" height="616" fill="none" stroke="#262433" stroke-width="2" rx="16"/>
+
+  <!-- Showcase Header -->
+  <g transform="translate(60, 50)" class="font-sans">
+    <rect x="0" y="0" width="160" height="28" rx="6" fill="#9D4EDD" stroke="#1E1E1E" stroke-width="2"/>
+    <text x="80" y="19" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">FEATURE SHOWCASE 03</text>
+    
+    <text x="0" y="65" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">Effort Audit &amp; Momentum Curves</text>
+    <text x="0" y="92" font-size="15" font-weight="700" fill="#8E8B9E">Real 7-day consistency graphs, streak shields, and intelligent progress ranking.</text>
+  </g>
+
+  <!-- Left: Annotated Analytics Insights -->
+  <g transform="translate(60, 185)" class="font-sans">
+    <!-- Item 1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">📈</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Zero Fake Data Charts</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">Replaced 780 lines of duplicate fake code with real 7-day FL Chart curves.</text>
+    </g>
+
+    <!-- Item 2 -->
+    <g transform="translate(0, 114)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FF9F43" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">🔥</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Automated Streak Engine</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">Tracks consecutive consistency and records your personal all-time best streaks.</text>
+    </g>
+
+    <!-- Item 3 -->
+    <g transform="translate(0, 228)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">🛡️</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Streak Freeze Tokens</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">2 tokens per month automatically shield your long streaks when sick or traveling.</text>
+    </g>
+  </g>
+
+  <!-- Right: Phone Device Mockup Frame showing Trends & Audit -->
+  <g transform="translate(680, 50)" class="font-sans">
+    <!-- Phone Shadow -->
+    <rect x="14" y="14" width="380" height="540" rx="36" fill="#0A090D"/>
+    <!-- Phone Body -->
+    <rect x="0" y="0" width="380" height="540" rx="36" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="6"/>
+
+    <g transform="translate(24, 30)">
+      <!-- Top Row Badges -->
+      <rect x="0" y="0" width="106" height="24" rx="6" fill="#9D4EDD" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="53" y="16" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">INTELLIGENCE</text>
+
+      <rect x="210" y="0" width="122" height="24" rx="6" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="271" y="16" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">OVERALL: 78%</text>
+
+      <!-- App Title -->
+      <text x="0" y="60" font-size="26" font-weight="900" fill="#1E1E1E" letter-spacing="-0.5">EFFORT AUDIT.</text>
+      <text x="0" y="78" font-size="11" font-weight="700" fill="#666666">Real data. Zero excuses. Track your momentum.</text>
+
+      <!-- 3 Stat Boxes -->
+      <g transform="translate(0, 94)">
+        <!-- Box 1 -->
+        <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="102" height="60" rx="12" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="51" y="30" font-size="18" font-weight="900" fill="#1E1E1E" text-anchor="middle">78%</text>
+        <text x="51" y="46" font-size="8" font-weight="900" fill="#1E1E1E" text-anchor="middle">WEEKLY RATE</text>
+
+        <!-- Box 2 -->
+        <g transform="translate(115, 0)">
+          <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
+          <rect x="0" y="0" width="102" height="60" rx="12" fill="#FF9F43" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="51" y="30" font-size="18" font-weight="900" fill="#1E1E1E" text-anchor="middle">14d</text>
+          <text x="51" y="46" font-size="8" font-weight="900" fill="#1E1E1E" text-anchor="middle">BEST STREAK</text>
+        </g>
+
+        <!-- Box 3 -->
+        <g transform="translate(230, 0)">
+          <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
+          <rect x="0" y="0" width="102" height="60" rx="12" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="51" y="30" font-size="18" font-weight="900" fill="#FFFFFF" text-anchor="middle">3/4</text>
+          <text x="51" y="46" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle">COMPLETED</text>
+        </g>
+      </g>
+
+      <!-- Dynamic Chart Card inside Phone -->
+      <g transform="translate(0, 174)">
+        <rect x="4" y="4" width="332" height="240" rx="18" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="332" height="240" rx="18" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
+
+        <rect x="14" y="14" width="32" height="32" rx="8" fill="#4D96FF" stroke="#1E1E1E" stroke-width="1.5"/>
+        <text x="30" y="36" font-size="16" text-anchor="middle">💧</text>
+
+        <text x="56" y="28" font-size="15" font-weight="900" fill="#1E1E1E">Hydrate 2.5L</text>
+        <text x="56" y="42" font-size="10" font-weight="700" fill="#777777">Daily Target • 14 day streak</text>
+
+        <rect x="264" y="16" width="54" height="22" rx="6" fill="#FFE66D" stroke="#1E1E1E" stroke-width="1.5"/>
+        <text x="291" y="31" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">100%</text>
+
+        <!-- Embedded SVG Line Chart Frame -->
+        <g transform="translate(14, 60)">
+          <rect x="0" y="0" width="304" height="154" rx="12" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="2"/>
+
+          <!-- Grid Lines -->
+          <line x1="16" y1="36" x2="288" y2="36" stroke="#DDDDDD" stroke-width="1.5" stroke-dasharray="4"/>
+          <line x1="16" y1="80" x2="288" y2="80" stroke="#DDDDDD" stroke-width="1.5" stroke-dasharray="4"/>
+          <line x1="16" y1="124" x2="288" y2="124" stroke="#1E1E1E" stroke-width="2"/>
+
+          <!-- Stepped Momentum Line -->
+          <path d="M 28 108 L 70 88 L 112 72 L 154 54 L 196 40 L 238 28 L 276 22" fill="none" stroke="#1E1E1E" stroke-width="3.5" stroke-linecap="round"/>
+
+          <!-- Dots -->
+          <circle cx="28" cy="108" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="70" cy="88" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="112" cy="72" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="154" cy="54" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="196" cy="40" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="238" cy="28" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+          <circle cx="276" cy="22" r="5.5" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2.5"/>
+
+          <!-- Days -->
+          <text x="28" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">M</text>
+          <text x="70" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
+          <text x="112" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">W</text>
+          <text x="154" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
+          <text x="196" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">F</text>
+          <text x="238" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
+          <text x="276" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

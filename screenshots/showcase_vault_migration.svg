@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&amp;family=JetBrains+Mono:wght@700&amp;display=swap');
+      .font-sans { font-family: 'Space Grotesk', -apple-system, sans-serif; }
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="640" fill="#14131A" rx="24"/>
+  <rect x="12" y="12" width="1176" height="616" fill="none" stroke="#262433" stroke-width="2" rx="16"/>
+
+  <!-- Showcase Header -->
+  <g transform="translate(60, 50)" class="font-sans">
+    <rect x="0" y="0" width="160" height="28" rx="6" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+    <text x="80" y="19" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">FEATURE SHOWCASE 02</text>
+    
+    <text x="0" y="65" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">Collision-Proof Device Migration</text>
+    <text x="0" y="92" font-size="15" font-weight="700" fill="#8E8B9E">Switch to any new phone with zero data loss, high-entropy keys, and PIN protection.</text>
+  </g>
+
+  <!-- Left: Annotated Security Guarantees -->
+  <g transform="translate(60, 185)" class="font-sans">
+    <!-- Guarantee 1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">🔑</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Dynamic 8-Char Key</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">2.8 Trillion combinations (HAB-XXXX-XXXX). Regenerates dynamically.</text>
+    </g>
+
+    <!-- Guarantee 2 -->
+    <g transform="translate(0, 114)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">🛡️</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Zero Data Interchange</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">UUID device tagging &amp; single-use token burn prevent user cross-contamination.</text>
+    </g>
+
+    <!-- Guarantee 3 -->
+    <g transform="translate(0, 228)">
+      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
+      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FF6B6B" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="39" y="44" font-size="18" text-anchor="middle">🔒</text>
+      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Optional 4-Digit Vault PIN</text>
+      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">Lock backups with a private PIN for double-layer cryptographic protection.</text>
+    </g>
+  </g>
+
+  <!-- Right: Phone Device Mockup Frame showing Vault Migration -->
+  <g transform="translate(680, 50)" class="font-sans">
+    <!-- Phone Shadow -->
+    <rect x="14" y="14" width="380" height="540" rx="36" fill="#0A090D"/>
+    <!-- Phone Body -->
+    <rect x="0" y="0" width="380" height="540" rx="36" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="6"/>
+
+    <g transform="translate(24, 30)">
+      <!-- Top Row Badges -->
+      <rect x="0" y="0" width="100" height="24" rx="6" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="50" y="16" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">TRANSFER</text>
+
+      <rect x="200" y="0" width="132" height="24" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+      <text x="266" y="16" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">🛡️ VAULT SECURED</text>
+
+      <!-- App Title -->
+      <text x="0" y="60" font-size="26" font-weight="900" fill="#1E1E1E" letter-spacing="-0.5">DEVICE SWITCH.</text>
+      <text x="0" y="78" font-size="11" font-weight="700" fill="#666666">Transfer 100% of habits &amp; streaks to a new phone.</text>
+
+      <!-- Tab Switcher (Old Phone vs New Phone) -->
+      <g transform="translate(0, 96)">
+        <rect x="0" y="0" width="332" height="38" rx="12" fill="#1E1E1E"/>
+        <rect x="4" y="4" width="160" height="30" rx="10" fill="#FFE66D" stroke="#1E1E1E" stroke-width="1.5"/>
+        <text x="84" y="24" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">OLD PHONE (EXPORT)</text>
+        <text x="246" y="24" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">NEW PHONE (RESTORE)</text>
+      </g>
+
+      <!-- Key Card -->
+      <g transform="translate(0, 148)">
+        <rect x="4" y="4" width="332" height="150" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="332" height="150" rx="16" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
+
+        <rect x="14" y="14" width="130" height="20" rx="4" fill="#FF6B6B" stroke="#1E1E1E" stroke-width="1.5"/>
+        <text x="79" y="28" font-size="9" font-weight="900" fill="#FFFFFF" text-anchor="middle">DYNAMIC SYNC KEY</text>
+
+        <text x="14" y="52" font-size="15" font-weight="900" fill="#1E1E1E">Your 8-Character Vault Token</text>
+        <text x="14" y="68" font-size="11" font-weight="700" fill="#777777">Enter on your new phone to restore all data.</text>
+
+        <!-- Sync Key Display Box -->
+        <g transform="translate(14, 80)">
+          <rect x="0" y="0" width="304" height="48" rx="10" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="14" y="31" font-size="17" font-weight="900" fill="#1E1E1E" class="font-mono" letter-spacing="1.5">HAB-9K2M-7Q4X</text>
+
+          <rect x="228" y="8" width="66" height="32" rx="8" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="261" y="28" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">COPY</text>
+        </g>
+      </g>
+
+      <!-- Guarantee Badge inside Phone -->
+      <g transform="translate(0, 314)">
+        <rect x="3" y="3" width="332" height="60" rx="14" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="332" height="60" rx="14" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="16" y="26" font-size="12" font-weight="900" fill="#1E1E1E">✓ Zero Data Interchange Guarantee</text>
+        <text x="16" y="44" font-size="10" font-weight="800" fill="#1E1E1E">Hardware UUID protection &amp; single-use key burn.</text>
+      </g>
+
+      <!-- Streak Shield Box inside Phone -->
+      <g transform="translate(0, 390)">
+        <rect x="3" y="3" width="332" height="70" rx="14" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="332" height="70" rx="14" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="16" y="28" font-size="13" font-weight="900" fill="#1E1E1E">🛡️ 2 STREAK FREEZE SHIELDS</text>
+        <text x="16" y="48" font-size="10" font-weight="700" fill="#1E1E1E">Transfers safely with your account across devices.</text>
+      </g>
+    </g>
+  </g>
+</svg>

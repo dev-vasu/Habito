@@ -1,0 +1,63 @@
+name: Build Habito Mobile Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+      - v2.0-upgrade
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    name: Build Android APK & App Bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+      - name: Build Android Release APK
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build Universal Release APK
+        run: flutter build apk --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: habito-android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Create GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+          name: Habito Release ${{ github.ref_name }}
+          body: |
+            ## 📱 Habito ${{ github.ref_name }} Release
+            - Download `app-release.apk` below to install on your Android device.
+            - Ensure "Install from Unknown Sources" is enabled in your Android settings.
+          draft: false
+          prerelease: false

@@ -31,18 +31,25 @@
 
 Watch the complete, high-definition audiovisual tutorial walking through how to download, install, personalize, and seamlessly migrate Habito across devices with spoken vocal narration.
 
-<p align="center">
-  <a href="./media/habito_v2_walkthrough.mp4">
-    <img src="./media/habito_v2_walkthrough.gif" width="100%" alt="Habito v2 Full Walkthrough Video Preview"/>
-  </a>
-</p>
+https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthrough.mp4
+
+<div align="center">
+  <video src="https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthrough.mp4" controls width="100%" poster="https://raw.githubusercontent.com/dev-vasu/Habito/main/media/habito_v2_video_poster.png">
+    <a href="https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthrough.mp4">
+      <img src="./media/habito_v2_walkthrough.gif" width="100%" alt="Habito v2 Full Walkthrough Video Preview (Click to Play)"/>
+    </a>
+  </video>
+</div>
 
 <p align="center">
-  <a href="./media/habito_v2_walkthrough.mp4">
+  <a href="https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthrough.mp4">
     <img src="https://img.shields.io/badge/▶%EF%B8%8F%20Play%20Full%20HD%20Video-1080p%20with%20Audio-E11D48?style=for-the-badge&logo=youtube&logoColor=white" alt="Play Walkthrough Video"/>
   </a>
   <a href="https://github.com/dev-vasu/Habito/releases/tag/v2.0.0">
-    <img src="https://img.shields.io/badge/📦%20Get%20APK-Release%20v2.0.0-16A34A?style=for-the-badge&logo=android&logoColor=white" alt="Get APK"/>
+    <img src="https://img.shields.io/badge/📦%20Download%20Direct%20APK-v2.0.0-16A34A?style=for-the-badge&logo=android&logoColor=white" alt="Get APK"/>
+  </a>
+  <a href="./media/habito_v2_walkthrough.mp4">
+    <img src="https://img.shields.io/badge/📂%20Local%20Repository%20File-MP4%20(2.8%20MB)-3B82F6?style=for-the-badge&logo=quicktime&logoColor=white" alt="Local MP4 File"/>
   </a>
 </p>
 

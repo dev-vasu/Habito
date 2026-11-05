@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habito v2.0 - Collision-Proof Vault Migration</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .brutal-shadow { box-shadow: 4px 4px 0px #1E1E1E; }
+    .brutal-shadow-sm { box-shadow: 2px 2px 0px #1E1E1E; }
+    .brutal-shadow-lg { box-shadow: 6px 6px 0px #1E1E1E; }
+    .phone-container {
+      width: 440px;
+      height: 920px;
+      border-radius: 46px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 10px #1E1E1E;
+      position: relative;
+      background: #FFFDF0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-800 antialiased py-10 px-4 flex flex-col items-center justify-center">
+
+  <!-- Header -->
+  <div class="text-center mb-6 max-w-xl px-4">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#FFE66D] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-lg text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
+      <i class="fa-solid fa-shield-halved"></i> Identity & Collision-Proof Vault
+    </div>
+    <h1 class="text-3xl font-black text-white tracking-tight">App Logo, Tagline & Security</h1>
+    <p class="text-sm text-slate-400 mt-1">Personalise your name & motto, explore the new brand logo, and test collision-proof migration.</p>
+  </div>
+
+  <!-- Interactive Phone Frame -->
+  <div class="phone-container border-4 border-[#1E1E1E]">
+    <!-- Status Bar -->
+    <div class="h-10 px-6 flex justify-between items-center text-xs font-black text-[#1E1E1E] z-30 pt-1">
+      <span>9:41</span>
+      <div class="w-24 h-4 bg-[#1E1E1E] rounded-full mx-auto"></div>
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-signal text-xs"></i>
+        <i class="fa-solid fa-wifi text-xs"></i>
+        <i class="fa-solid fa-battery-full text-xs"></i>
+      </div>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="flex-1 px-5 pt-2 pb-6 space-y-3.5 flex flex-col justify-between">
+
+      <!-- BRAND LOGO & TAGLINE BANNER -->
+      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex items-center gap-3.5">
+        <div class="w-14 h-14 rounded-xl border-2 border-[#1E1E1E] bg-[#FFE66D] flex items-center justify-center brutal-shadow-sm flex-shrink-0">
+          <i class="fa-solid fa-bolt text-2xl text-[#1E1E1E]"></i>
+        </div>
+        <div>
+          <span class="text-[9px] font-black uppercase tracking-widest bg-[#4D96FF] text-white px-2 py-0.5 rounded border border-[#1E1E1E]">OFFICIAL BRAND IDENTITY</span>
+          <h3 class="text-xl font-black text-[#1E1E1E] tracking-tight mt-0.5">HABITO</h3>
+          <p class="text-[11px] font-black text-slate-600">&quot;Relentless Routine. Unstoppable Momentum.&quot;</p>
+        </div>
+      </div>
+
+      <!-- PERSONAL IDENTITY CARD -->
+      <div class="bg-[#FFE66D] p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-[10px] font-black uppercase tracking-wider text-[#1E1E1E]">USER PROFILE</span>
+          <div class="px-2.5 py-0.5 bg-white text-[#1E1E1E] rounded-lg border-2 border-[#1E1E1E] brutal-shadow-sm text-[10px] font-black">
+            <i class="fa-solid fa-pen"></i> EDIT NAME
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">⚡</span>
+          <div>
+            <h4 class="text-base font-black text-[#1E1E1E]">VASUDEV'S PROTOCOLS</h4>
+            <p class="text-xs font-bold text-[#1E1E1E]/80">&quot;Relentless consistency. Zero excuses.&quot;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLLISION-PROOF MIGRATION SECURITY BOX -->
+      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2.5">
+        <div class="flex justify-between items-center">
+          <span class="px-2 py-0.5 bg-[#6BCB77] text-[#1E1E1E] text-[9px] font-black rounded border border-[#1E1E1E]">COLLISION-PROOF ENGINE</span>
+          <span class="text-xs font-black text-[#1E1E1E] flex items-center gap-1">
+            <i class="fa-solid fa-rotate"></i> REGENERATE
+          </span>
+        </div>
+
+        <div>
+          <h4 class="font-black text-sm text-[#1E1E1E]">Dynamic Alphanumeric Sync Key</h4>
+          <p class="text-[11px] text-slate-500 font-bold">
+            Generated randomly on each session. 2.8 Trillion combinations with unique device UUID.
+          </p>
+        </div>
+
+        <!-- The Code Box -->
+        <div class="bg-[#FFFDF0] p-2.5 rounded-xl border-2 border-[#1E1E1E] flex items-center justify-between">
+          <div>
+            <span class="text-[8px] font-black text-slate-400 block tracking-widest uppercase">DYNAMIC TOKEN</span>
+            <span class="font-mono-code text-lg font-black text-[#1E1E1E]">HAB-9K2M-7Q4X</span>
+          </div>
+          <div class="px-3 py-1.5 bg-[#FFE66D] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-xl font-black text-xs brutal-shadow-sm">
+            COPY
+          </div>
+        </div>
+
+        <!-- How collision is prevented -->
+        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 text-[10px] font-bold text-slate-600 space-y-0.5">
+          <div class="flex items-center gap-1 text-[#1E1E1E]">
+            <i class="fa-solid fa-lock text-emerald-600"></i> <strong>Zero Data Interchange Guarantee:</strong>
+          </div>
+          <p>• <strong>High Entropy:</strong> 8 alphanumeric chars ($36^8 \approx 2.8$ Trillion possibilities).</p>
+          <p>• <strong>Device UUID & Salt:</strong> Data is tagged to your unique device ID.</p>
+          <p>• <strong>Optional 4-Digit PIN:</strong> Lock your backup so only your PIN can unlock it.</p>
+        </div>
+      </div>
+
+      <!-- OPTIONAL PIN LOCK DEMO -->
+      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
+        <span class="px-2 py-0.5 bg-[#4D96FF] text-white text-[9px] font-black rounded border border-[#1E1E1E]">DOUBLE-LOCK SECURITY</span>
+        <h4 class="font-black text-xs text-[#1E1E1E]">Set 4-Digit Vault PIN</h4>
+        <div class="flex gap-2">
+          <div class="w-20 text-center font-mono-code text-sm font-black py-1.5 rounded-xl border-2 border-[#1E1E1E] bg-[#FFFDF0]">
+            ••••
+          </div>
+          <div class="flex-1 py-1.5 bg-[#6BCB77] text-[#1E1E1E] border-2 border-[#1E1E1E] rounded-xl font-black text-xs brutal-shadow-sm text-center flex items-center justify-center">
+            LOCK VAULT BACKUP
+          </div>
+        </div>
+        <p class="text-[9px] font-bold text-slate-500">Unencrypted. Enter PIN to lock exported data.</p>
+      </div>
+
+      <!-- Bottom Navigation Bar (UNCROPPED!) -->
+      <div class="bg-white rounded-2xl border-2 border-[#1E1E1E] brutal-shadow px-4 py-2 flex justify-center items-center">
+        <div class="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-[#1E1E1E] text-white font-black text-xs border-2 border-[#1E1E1E]">
+          <i class="fa-solid fa-shield-halved text-xs"></i> SECURITY &amp; IDENTITY
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Home Indicator -->
+    <div class="w-32 h-1 bg-[#1E1E1E] rounded-full mx-auto mb-2"></div>
+  </div>
+
+</body>
+</html>

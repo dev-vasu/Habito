@@ -70,7 +70,7 @@ https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthroug
 *Tactile 3D checkboxes that depress into the surface, live energy fuel gauge, frequency tags, and personalized identity.*
 
 <p align="center">
-  <img src="./screenshots/showcase_protocol_fuel.svg" width="100%" alt="Habito Daily Engine Showcase"/>
+  <img src="./screenshots/showcase_protocol_fuel.png" width="100%" alt="Habito Daily Engine Showcase"/>
 </p>
 
 ---
@@ -79,7 +79,7 @@ https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthroug
 *Switch to any new phone in seconds with zero data loss. Dynamic high-entropy keys ($2.8\times 10^{12}$ combinations), device UUID hardware tagging, and optional 4-digit PIN encryption.*
 
 <p align="center">
-  <img src="./screenshots/showcase_vault_migration.svg" width="100%" alt="Habito Vault Migration Showcase"/>
+  <img src="./screenshots/showcase_vault_migration.png" width="100%" alt="Habito Vault Migration Showcase"/>
 </p>
 
 ---
@@ -88,7 +88,7 @@ https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthroug
 *Zero fake data. Real 7-day angular FL Chart performance curves, live streak tracking, and 2 monthly Streak Freeze Shields to protect your long momentum.*
 
 <p align="center">
-  <img src="./screenshots/showcase_trends_analytics.svg" width="100%" alt="Habito Trends and Analytics Showcase"/>
+  <img src="./screenshots/showcase_trends_analytics.png" width="100%" alt="Habito Trends and Analytics Showcase"/>
 </p>
 
 ---

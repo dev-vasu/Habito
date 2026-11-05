@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habito v2.0 - Effort Audit, Momentum Curves & Streak Shields</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .brutal-shadow { box-shadow: 4px 4px 0px #1E1E1E; }
+    .brutal-shadow-sm { box-shadow: 2px 2px 0px #1E1E1E; }
+    .brutal-shadow-lg { box-shadow: 6px 6px 0px #1E1E1E; }
+    .phone-container {
+      width: 440px;
+      height: 920px;
+      border-radius: 46px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 0 10px #1E1E1E;
+      position: relative;
+      background: #FFFDF0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-800 antialiased py-10 px-4 flex flex-col items-center justify-center">
+
+  <!-- Header -->
+  <div class="text-center mb-6 max-w-xl px-4">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#4D96FF] text-white border-2 border-[#1E1E1E] rounded-lg text-xs font-black uppercase tracking-wider mb-2 brutal-shadow-sm">
+      <i class="fa-solid fa-chart-line"></i> Analytics & Streak Shields
+    </div>
+    <h1 class="text-3xl font-black text-white tracking-tight">Effort Audit &amp; Momentum Curves</h1>
+    <p class="text-sm text-slate-400 mt-1">Zero fake data. Real 7-day angular FL consistency curves, streak tracking, and streak freeze shields.</p>
+  </div>
+
+  <!-- Interactive Phone Frame -->
+  <div class="phone-container border-4 border-[#1E1E1E]">
+    <!-- Status Bar -->
+    <div class="h-10 px-6 flex justify-between items-center text-xs font-black text-[#1E1E1E] z-30 pt-1">
+      <span>9:41</span>
+      <div class="w-24 h-4 bg-[#1E1E1E] rounded-full mx-auto"></div>
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-signal text-xs"></i>
+        <i class="fa-solid fa-wifi text-xs"></i>
+        <i class="fa-solid fa-battery-full text-xs"></i>
+      </div>
+    </div>
+
+    <!-- Screen Content -->
+    <div class="flex-1 px-5 pt-2 pb-6 space-y-3.5 flex flex-col justify-between">
+
+      <!-- AUDIT HEADER -->
+      <div class="bg-[#FFE66D] p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex justify-between items-center">
+        <div>
+          <span class="text-[9px] font-black uppercase tracking-wider text-[#1E1E1E] block">ANALYTICS ENGINE</span>
+          <h4 class="text-base font-black text-[#1E1E1E]">EFFORT AUDIT &amp; METRICS</h4>
+        </div>
+        <div class="px-2.5 py-1 bg-white text-[#1E1E1E] rounded-lg border-2 border-[#1E1E1E] brutal-shadow-sm text-[10px] font-black">
+          THIS MONTH
+        </div>
+      </div>
+
+      <!-- THREE STAT BOXES -->
+      <div class="grid grid-cols-3 gap-2.5">
+        <!-- Box 1 -->
+        <div class="bg-[#6BCB77] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#1E1E1E] block">14</span>
+          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">CURRENT</span>
+          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">DAYS STREAK</span>
+        </div>
+        <!-- Box 2 -->
+        <div class="bg-[#93C5FD] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#1E1E1E] block">21</span>
+          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">RECORD</span>
+          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">BEST STREAK</span>
+        </div>
+        <!-- Box 3 -->
+        <div class="bg-[#DDD6FE] p-2.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow text-center">
+          <span class="text-2xl font-black text-[#1E1E1E] block">2</span>
+          <span class="text-[9px] font-black uppercase text-[#1E1E1E] block mt-0.5">SHIELDS</span>
+          <span class="text-[8px] font-bold text-[#1E1E1E]/80 block">ACTIVE DEFENSE</span>
+        </div>
+      </div>
+
+      <!-- 7-DAY CONSISTENCY CHART CARD -->
+      <div class="bg-white p-3.5 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-[11px] font-black uppercase tracking-wider text-[#1E1E1E]">7-DAY CONSISTENCY AUDIT</span>
+          <span class="text-[11px] font-black text-emerald-600">88% ADHERENCE</span>
+        </div>
+
+        <!-- Visual Bar Chart -->
+        <div class="h-28 flex items-end justify-between px-2 pt-2 border-b-2 border-slate-200 pb-2">
+          <!-- Mon -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-slate-400">75%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 60px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">M</span>
+          </div>
+          <!-- Tue -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">T</span>
+          </div>
+          <!-- Wed -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-slate-400">60%</span>
+            <div class="w-6 bg-[#FFE66D] border-2 border-[#1E1E1E] rounded-t-md" style="height: 48px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">W</span>
+          </div>
+          <!-- Thu -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">T</span>
+          </div>
+          <!-- Fri -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-emerald-600 font-black">100%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 80px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">F</span>
+          </div>
+          <!-- Sat -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-slate-400">75%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 60px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">S</span>
+          </div>
+          <!-- Sun -->
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-[8px] font-bold text-slate-400">90%</span>
+            <div class="w-6 bg-[#6BCB77] border-2 border-[#1E1E1E] rounded-t-md" style="height: 72px;"></div>
+            <span class="text-[10px] font-black text-[#1E1E1E]">S</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FREEZE SHIELD DEFENSE CARD -->
+      <div class="bg-[#DDD6FE] p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-white border-2 border-[#1E1E1E] flex items-center justify-center text-xl flex-shrink-0">
+          🛡️
+        </div>
+        <div>
+          <h5 class="text-xs font-black text-[#1E1E1E]">2 Active Streak Freeze Shields</h5>
+          <p class="text-[10px] font-bold text-slate-700">Auto-protects streak if travel or emergency prevents check-in.</p>
+        </div>
+      </div>
+
+      <!-- RANKED PROTOCOL ADHERENCE BREAKDOWN -->
+      <div class="bg-white p-3 rounded-2xl border-2 border-[#1E1E1E] brutal-shadow space-y-1.5">
+        <span class="text-[9px] font-black uppercase tracking-wider text-slate-500">PROTOCOL RANKINGS (BY ADHERENCE)</span>
+        
+        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
+          <span class="font-black text-[#1E1E1E]">🥇 Morning Deep Work (4h)</span>
+          <span class="font-black text-emerald-700">95% • 21 Checks</span>
+        </div>
+
+        <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
+          <span class="font-black text-[#1E1E1E]">🥈 Hydration (3.0 Liters)</span>
+          <span class="font-black text-emerald-700">88% • 18 Checks</span>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation Bar (UNCROPPED!) -->
+      <div class="bg-white rounded-2xl border-2 border-[#1E1E1E] brutal-shadow px-4 py-2 flex justify-between items-center text-xs font-black">
+        <div class="text-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-bolt text-xs"></i> PROTOCOLS
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-[#1E1E1E] text-white flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-simple text-xs"></i> AUDIT
+        </div>
+        <div class="text-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate text-xs"></i> SYNC
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Home Indicator -->
+    <div class="w-32 h-1 bg-[#1E1E1E] rounded-full mx-auto mb-2"></div>
+  </div>
+
+</body>
+</html>

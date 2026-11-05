@@ -9,6 +9,9 @@ on:
       - v2.0-upgrade
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-android:
     name: Build Production AAB (Google Play) & APK

@@ -1,144 +1,230 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 980" width="100%" height="100%">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&amp;family=JetBrains+Mono:wght@700&amp;display=swap');
       .font-sans { font-family: 'Space Grotesk', -apple-system, sans-serif; }
       .font-mono { font-family: 'JetBrains Mono', monospace; }
+      .brutal-shadow { filter: drop-shadow(4px 4px 0px #1E1E1E); }
     </style>
   </defs>
 
-  <!-- Canvas Background -->
-  <rect width="1200" height="640" fill="#14131A" rx="24"/>
-  <rect x="12" y="12" width="1176" height="616" fill="none" stroke="#262433" stroke-width="2" rx="16"/>
+  <!-- Studio Canvas Background -->
+  <rect width="1240" height="980" fill="#0F172A" rx="28"/>
+  <rect x="12" y="12" width="1216" height="956" fill="none" stroke="#1E293B" stroke-width="2" rx="20"/>
 
-  <!-- Showcase Header -->
-  <g transform="translate(60, 50)" class="font-sans">
-    <rect x="0" y="0" width="160" height="28" rx="6" fill="#9D4EDD" stroke="#1E1E1E" stroke-width="2"/>
-    <text x="80" y="19" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">FEATURE SHOWCASE 03</text>
+  <!-- LEFT: Showcase Narrative & Architecture Highlights -->
+  <g transform="translate(60, 56)" class="font-sans">
+    <!-- Showcase Tag -->
+    <rect x="0" y="0" width="190" height="30" rx="8" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
+    <text x="95" y="20" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">📈 FEATURE SHOWCASE 03</text>
     
-    <text x="0" y="65" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">Effort Audit &amp; Momentum Curves</text>
-    <text x="0" y="92" font-size="15" font-weight="700" fill="#8E8B9E">Real 7-day consistency graphs, streak shields, and intelligent progress ranking.</text>
+    <text x="0" y="74" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">Effort Audit &amp; Momentum</text>
+    <text x="0" y="104" font-size="15" font-weight="700" fill="#94A3B8">Zero fake data. Real 7-day angular FL consistency curves &amp; streak freeze shields.</text>
+
+    <!-- 4 Architectural Guarantee Cards -->
+    <g transform="translate(0, 140)">
+      <!-- Card 1 -->
+      <g transform="translate(0, 0)">
+        <rect x="4" y="4" width="530" height="130" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="530" height="130" rx="16" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+        <rect x="20" y="24" width="48" height="48" rx="12" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2.5"/>
+        <text x="44" y="55" font-size="22" text-anchor="middle">📊</text>
+        <text x="84" y="44" font-size="17" font-weight="900" fill="#FFFFFF">100% Real Computed Metrics</text>
+        <text x="84" y="70" font-size="13" font-weight="700" fill="#94A3B8">Replaced 780 lines of legacy hardcoded arrays with genuine calculations.</text>
+        <text x="84" y="92" font-size="12" font-weight="700" fill="#CBD5E1">Calculates exact current streak, personal records, and weekly adherence.</text>
+      </g>
+
+      <!-- Card 2 -->
+      <g transform="translate(0, 150)">
+        <rect x="4" y="4" width="530" height="130" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="530" height="130" rx="16" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+        <rect x="20" y="24" width="48" height="48" rx="12" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2.5"/>
+        <text x="44" y="55" font-size="22" text-anchor="middle">🛡️</text>
+        <text x="84" y="44" font-size="17" font-weight="900" fill="#FFFFFF">Streak Freeze Shield Defense</text>
+        <text x="84" y="70" font-size="13" font-weight="700" fill="#94A3B8">2 monthly shields prevent life emergencies from breaking a 50+ day streak.</text>
+        <text x="84" y="92" font-size="12" font-weight="700" fill="#CBD5E1">Intelligent freeze rules protect momentum when travel or sickness hits.</text>
+      </g>
+
+      <!-- Card 3 -->
+      <g transform="translate(0, 300)">
+        <rect x="4" y="4" width="530" height="130" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="530" height="130" rx="16" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+        <rect x="20" y="24" width="48" height="48" rx="12" fill="#93C5FD" stroke="#1E1E1E" stroke-width="2.5"/>
+        <text x="44" y="55" font-size="22" text-anchor="middle">📈</text>
+        <text x="84" y="44" font-size="17" font-weight="900" fill="#FFFFFF">Angular 7-Day Consistency Bars</text>
+        <text x="84" y="70" font-size="13" font-weight="700" fill="#94A3B8">Visual daily completion rates rendered with high-contrast angular bars.</text>
+        <text x="84" y="92" font-size="12" font-weight="700" fill="#CBD5E1">Spot low-energy days and celebrate peak flow consistency with clarity.</text>
+      </g>
+
+      <!-- Card 4 -->
+      <g transform="translate(0, 450)">
+        <rect x="4" y="4" width="530" height="130" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="530" height="130" rx="16" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+        <rect x="20" y="24" width="48" height="48" rx="12" fill="#DDD6FE" stroke="#1E1E1E" stroke-width="2.5"/>
+        <text x="44" y="55" font-size="22" text-anchor="middle">🏆</text>
+        <text x="84" y="44" font-size="17" font-weight="900" fill="#FFFFFF">Dynamic Ranked Protocol Audit</text>
+        <text x="84" y="70" font-size="13" font-weight="700" fill="#94A3B8">Sorts your habits automatically by adherence rate and check-in volume.</text>
+        <text x="84" y="92" font-size="12" font-weight="700" fill="#CBD5E1">Shows where your discipline is strongest and which goals require focus.</text>
+      </g>
+    </g>
   </g>
 
-  <!-- Left: Annotated Analytics Insights -->
-  <g transform="translate(60, 185)" class="font-sans">
-    <!-- Item 1 -->
-    <g transform="translate(0, 0)">
-      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
-      <rect x="18" y="18" width="42" height="42" rx="10" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
-      <text x="39" y="44" font-size="18" text-anchor="middle">📈</text>
-      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Zero Fake Data Charts</text>
-      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">Replaced 780 lines of duplicate fake code with real 7-day FL Chart curves.</text>
-    </g>
+  <!-- RIGHT: Complete, Uncropped Full-Height Phone Simulator -->
+  <g transform="translate(680, 56)" class="font-sans">
+    <!-- Phone Outer Shadow -->
+    <rect x="14" y="14" width="490" height="868" rx="44" fill="#030712"/>
 
-    <!-- Item 2 -->
-    <g transform="translate(0, 114)">
-      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
-      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FF9F43" stroke="#1E1E1E" stroke-width="2"/>
-      <text x="39" y="44" font-size="18" text-anchor="middle">🔥</text>
-      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Automated Streak Engine</text>
-      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">Tracks consecutive consistency and records your personal all-time best streaks.</text>
-    </g>
+    <!-- Phone Bezel -->
+    <rect x="0" y="0" width="490" height="868" rx="44" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="10"/>
 
-    <!-- Item 3 -->
-    <g transform="translate(0, 228)">
-      <rect x="0" y="0" width="460" height="96" rx="16" fill="#1E1C27" stroke="#2E2C3D" stroke-width="2"/>
-      <rect x="18" y="18" width="42" height="42" rx="10" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
-      <text x="39" y="44" font-size="18" text-anchor="middle">🛡️</text>
-      <text x="74" y="38" font-size="16" font-weight="900" fill="#FFFFFF">Streak Freeze Tokens</text>
-      <text x="74" y="58" font-size="12" font-weight="700" fill="#9D99AF">2 tokens per month automatically shield your long streaks when sick or traveling.</text>
-    </g>
-  </g>
+    <!-- Dynamic Island / Speaker Notch -->
+    <rect x="180" y="14" width="130" height="24" rx="12" fill="#1E1E1E"/>
 
-  <!-- Right: Phone Device Mockup Frame showing Trends & Audit -->
-  <g transform="translate(680, 50)" class="font-sans">
-    <!-- Phone Shadow -->
-    <rect x="14" y="14" width="380" height="540" rx="36" fill="#0A090D"/>
-    <!-- Phone Body -->
-    <rect x="0" y="0" width="380" height="540" rx="36" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="6"/>
+    <!-- Status Bar -->
+    <text x="38" y="32" font-size="13" font-weight="900" fill="#1E1E1E">9:41</text>
+    <text x="452" y="32" font-size="12" font-weight="900" fill="#1E1E1E" text-anchor="end">5G  85%</text>
 
-    <g transform="translate(24, 30)">
-      <!-- Top Row Badges -->
-      <rect x="0" y="0" width="106" height="24" rx="6" fill="#9D4EDD" stroke="#1E1E1E" stroke-width="2"/>
-      <text x="53" y="16" font-size="10" font-weight="900" fill="#FFFFFF" text-anchor="middle">INTELLIGENCE</text>
+    <!-- Phone Inner Content Canvas -->
+    <g transform="translate(20, 52)">
 
-      <rect x="210" y="0" width="122" height="24" rx="6" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
-      <text x="271" y="16" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">OVERALL: 78%</text>
+      <!-- 1. Header Bar -->
+      <g transform="translate(0, 0)">
+        <rect x="4" y="4" width="450" height="66" rx="16" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="450" height="66" rx="16" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2.5"/>
+        <text x="24" y="41" font-size="18" font-weight="900" fill="#1E1E1E">EFFORT AUDIT &amp; METRICS</text>
+        <rect x="340" y="18" width="94" height="28" rx="6" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="387" y="36" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">THIS MONTH</text>
+      </g>
 
-      <!-- App Title -->
-      <text x="0" y="60" font-size="26" font-weight="900" fill="#1E1E1E" letter-spacing="-0.5">EFFORT AUDIT.</text>
-      <text x="0" y="78" font-size="11" font-weight="700" fill="#666666">Real data. Zero excuses. Track your momentum.</text>
+      <!-- 2. Three Metric Boxes -->
+      <g transform="translate(0, 82)">
+        <!-- Box 1: Current Streak -->
+        <rect x="3" y="3" width="142" height="96" rx="14" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="142" height="96" rx="14" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="71" y="44" font-size="32" font-weight="900" fill="#1E1E1E" text-anchor="middle">14</text>
+        <text x="71" y="68" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">CURRENT</text>
+        <text x="71" y="82" font-size="9" font-weight="700" fill="#1E1E1E" text-anchor="middle">DAYS STREAK</text>
 
-      <!-- 3 Stat Boxes -->
-      <g transform="translate(0, 94)">
-        <!-- Box 1 -->
-        <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
-        <rect x="0" y="0" width="102" height="60" rx="12" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
-        <text x="51" y="30" font-size="18" font-weight="900" fill="#1E1E1E" text-anchor="middle">78%</text>
-        <text x="51" y="46" font-size="8" font-weight="900" fill="#1E1E1E" text-anchor="middle">WEEKLY RATE</text>
-
-        <!-- Box 2 -->
-        <g transform="translate(115, 0)">
-          <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
-          <rect x="0" y="0" width="102" height="60" rx="12" fill="#FF9F43" stroke="#1E1E1E" stroke-width="2"/>
-          <text x="51" y="30" font-size="18" font-weight="900" fill="#1E1E1E" text-anchor="middle">14d</text>
-          <text x="51" y="46" font-size="8" font-weight="900" fill="#1E1E1E" text-anchor="middle">BEST STREAK</text>
+        <!-- Box 2: Best Streak -->
+        <g transform="translate(154, 0)">
+          <rect x="3" y="3" width="142" height="96" rx="14" fill="#1E1E1E"/>
+          <rect x="0" y="0" width="142" height="96" rx="14" fill="#93C5FD" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="71" y="44" font-size="32" font-weight="900" fill="#1E1E1E" text-anchor="middle">21</text>
+          <text x="71" y="68" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">RECORD</text>
+          <text x="71" y="82" font-size="9" font-weight="700" fill="#1E1E1E" text-anchor="middle">BEST STREAK</text>
         </g>
 
-        <!-- Box 3 -->
-        <g transform="translate(230, 0)">
-          <rect x="2" y="2" width="102" height="60" rx="12" fill="#1E1E1E"/>
-          <rect x="0" y="0" width="102" height="60" rx="12" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <text x="51" y="30" font-size="18" font-weight="900" fill="#FFFFFF" text-anchor="middle">3/4</text>
-          <text x="51" y="46" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle">COMPLETED</text>
+        <!-- Box 3: Freeze Shields -->
+        <g transform="translate(308, 0)">
+          <rect x="3" y="3" width="142" height="96" rx="14" fill="#1E1E1E"/>
+          <rect x="0" y="0" width="142" height="96" rx="14" fill="#DDD6FE" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="71" y="44" font-size="32" font-weight="900" fill="#1E1E1E" text-anchor="middle">2</text>
+          <text x="71" y="68" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">SHIELDS</text>
+          <text x="71" y="82" font-size="9" font-weight="700" fill="#1E1E1E" text-anchor="middle">ACTIVE DEFENSE</text>
         </g>
       </g>
 
-      <!-- Dynamic Chart Card inside Phone -->
-      <g transform="translate(0, 174)">
-        <rect x="4" y="4" width="332" height="240" rx="18" fill="#1E1E1E"/>
-        <rect x="0" y="0" width="332" height="240" rx="18" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
+      <!-- 3. Consistency Bar Chart Box -->
+      <g transform="translate(0, 196)">
+        <rect x="4" y="4" width="450" height="210" rx="18" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="450" height="210" rx="18" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
 
-        <rect x="14" y="14" width="32" height="32" rx="8" fill="#4D96FF" stroke="#1E1E1E" stroke-width="1.5"/>
-        <text x="30" y="36" font-size="16" text-anchor="middle">💧</text>
+        <text x="20" y="30" font-size="13" font-weight="900" fill="#1E1E1E" letter-spacing="0.5">7-DAY CONSISTENCY AUDIT</text>
+        <text x="430" y="30" font-size="11" font-weight="900" fill="#059669" text-anchor="end">88% ADHERENCE</text>
 
-        <text x="56" y="28" font-size="15" font-weight="900" fill="#1E1E1E">Hydrate 2.5L</text>
-        <text x="56" y="42" font-size="10" font-weight="700" fill="#777777">Daily Target • 14 day streak</text>
+        <!-- Bar Chart Group -->
+        <g transform="translate(36, 60)">
+          <!-- Day Mon -->
+          <rect x="0" y="30" width="38" height="85" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="19" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">M</text>
+          <text x="19" y="24" font-size="10" font-weight="900" fill="#475569" text-anchor="middle">75%</text>
 
-        <rect x="264" y="16" width="54" height="22" rx="6" fill="#FFE66D" stroke="#1E1E1E" stroke-width="1.5"/>
-        <text x="291" y="31" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">100%</text>
+          <!-- Day Tue -->
+          <rect x="56" y="15" width="38" height="100" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="75" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
+          <text x="75" y="9" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">100%</text>
 
-        <!-- Embedded SVG Line Chart Frame -->
-        <g transform="translate(14, 60)">
-          <rect x="0" y="0" width="304" height="154" rx="12" fill="#FFFDF0" stroke="#1E1E1E" stroke-width="2"/>
+          <!-- Day Wed -->
+          <rect x="112" y="45" width="38" height="70" rx="6" fill="#FFE66D" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="131" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">W</text>
+          <text x="131" y="39" font-size="10" font-weight="900" fill="#475569" text-anchor="middle">60%</text>
 
-          <!-- Grid Lines -->
-          <line x1="16" y1="36" x2="288" y2="36" stroke="#DDDDDD" stroke-width="1.5" stroke-dasharray="4"/>
-          <line x1="16" y1="80" x2="288" y2="80" stroke="#DDDDDD" stroke-width="1.5" stroke-dasharray="4"/>
-          <line x1="16" y1="124" x2="288" y2="124" stroke="#1E1E1E" stroke-width="2"/>
+          <!-- Day Thu -->
+          <rect x="168" y="15" width="38" height="100" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="187" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
+          <text x="187" y="9" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">100%</text>
 
-          <!-- Stepped Momentum Line -->
-          <path d="M 28 108 L 70 88 L 112 72 L 154 54 L 196 40 L 238 28 L 276 22" fill="none" stroke="#1E1E1E" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Day Fri -->
+          <rect x="224" y="15" width="38" height="100" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="243" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">F</text>
+          <text x="243" y="9" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">100%</text>
 
-          <!-- Dots -->
-          <circle cx="28" cy="108" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="70" cy="88" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="112" cy="72" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="154" cy="54" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="196" cy="40" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="238" cy="28" r="4.5" fill="#4D96FF" stroke="#1E1E1E" stroke-width="2"/>
-          <circle cx="276" cy="22" r="5.5" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2.5"/>
+          <!-- Day Sat -->
+          <rect x="280" y="30" width="38" height="85" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="299" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
+          <text x="299" y="24" font-size="10" font-weight="900" fill="#475569" text-anchor="middle">75%</text>
 
-          <!-- Days -->
-          <text x="28" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">M</text>
-          <text x="70" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
-          <text x="112" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">W</text>
-          <text x="154" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">T</text>
-          <text x="196" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">F</text>
-          <text x="238" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
-          <text x="276" y="142" font-size="10" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
+          <!-- Day Sun -->
+          <rect x="336" y="20" width="38" height="95" rx="6" fill="#6BCB77" stroke="#1E1E1E" stroke-width="2"/>
+          <text x="355" y="132" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">S</text>
+          <text x="355" y="14" font-size="10" font-weight="900" fill="#475569" text-anchor="middle">90%</text>
         </g>
       </g>
+
+      <!-- 4. Streak Freeze Shield Defense Banner -->
+      <g transform="translate(0, 420)">
+        <rect x="4" y="4" width="450" height="94" rx="18" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="450" height="94" rx="18" fill="#DDD6FE" stroke="#1E1E1E" stroke-width="2.5"/>
+
+        <rect x="18" y="18" width="44" height="44" rx="10" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2"/>
+        <text x="40" y="47" font-size="22" text-anchor="middle">🛡️</text>
+
+        <text x="74" y="38" font-size="16" font-weight="900" fill="#1E1E1E">2 Streak Freeze Shields Ready</text>
+        <text x="74" y="56" font-size="12" font-weight="700" fill="#475569">If you miss a day due to emergency or travel,</text>
+        <text x="74" y="74" font-size="11" font-weight="800" fill="#1E1E1E">shields auto-protect your streak with zero penalty.</text>
+      </g>
+
+      <!-- 5. Ranked Protocol Adherence Breakdown -->
+      <g transform="translate(0, 528)">
+        <rect x="4" y="4" width="450" height="158" rx="18" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="450" height="158" rx="18" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
+
+        <text x="20" y="28" font-size="12" font-weight="900" fill="#1E1E1E" letter-spacing="1">PROTOCOL RANKINGS (BY ADHERENCE)</text>
+
+        <!-- Rank 1 -->
+        <g transform="translate(18, 42)">
+          <rect x="0" y="0" width="414" height="48" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+          <text x="14" y="28" font-size="13" font-weight="900" fill="#1E1E1E">🥇 Morning Deep Work (4h)</text>
+          <text x="400" y="28" font-size="12" font-weight="900" fill="#059669" text-anchor="end">95% • 21 Checks</text>
+        </g>
+
+        <!-- Rank 2 -->
+        <g transform="translate(18, 98)">
+          <rect x="0" y="0" width="414" height="48" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+          <text x="14" y="28" font-size="13" font-weight="900" fill="#1E1E1E">🥈 Hydration (3.0 Liters)</text>
+          <text x="400" y="28" font-size="12" font-weight="900" fill="#059669" text-anchor="end">88% • 18 Checks</text>
+        </g>
+      </g>
+
+      <!-- 6. COMPLETE BOTTOM NAVIGATION BAR (NOT CROPPED!) -->
+      <g transform="translate(0, 702)">
+        <rect x="4" y="4" width="450" height="56" rx="18" fill="#1E1E1E"/>
+        <rect x="0" y="0" width="450" height="56" rx="18" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2.5"/>
+
+        <!-- Protocols Tab -->
+        <text x="79" y="33" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">⚡ PROTOCOLS</text>
+
+        <!-- Active Audit Tab -->
+        <rect x="156" y="8" width="138" height="40" rx="12" fill="#1E1E1E"/>
+        <text x="225" y="33" font-size="11" font-weight="900" fill="#FFFFFF" text-anchor="middle">📊 AUDIT</text>
+
+        <!-- Sync Tab -->
+        <text x="370" y="33" font-size="11" font-weight="900" fill="#1E1E1E" text-anchor="middle">🔄 SYNC</text>
+      </g>
+
     </g>
+
+    <!-- Bottom Home Indicator Bar -->
+    <rect x="175" y="848" width="140" height="4" rx="2" fill="#1E1E1E"/>
   </g>
 </svg>

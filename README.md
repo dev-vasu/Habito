@@ -53,14 +53,12 @@ https://github.com/dev-vasu/Habito/releases/download/v2.0.0/habito_v2_walkthroug
   </a>
 </p>
 
-### 🎙️ Video Chapters & Step Breakdown:
-1. **0:00 - Introduction & Neo-Brutalist Architecture:** Overview of Habito v2.0, local-first design philosophy, zero cloud lock-in, and tactile interactions.
-2. **0:16 - Step 1: Downloading from GitHub Releases:** Choosing between `app-release.apk` (direct phone sideload) and `app-release.aab` (official Google Play Store bundle).
-3. **0:33 - Step 2: One-Tap Android Installation:** Bypassing sign-up walls, granting standard package permissions, and launching directly into your protocol.
-4. **0:50 - Step 3: Profile Customization & Live Fuel Gauge:** Personalizing your Commander callsign, setting a personal motto, choosing your avatar badge, and monitoring your real-time daily fuel completion.
-5. **1:05 - Step 4: Tracking Daily Protocols & Streak Shields:** Completing daily habits, understanding frequency schedules (7/7, 5/7, flexible), earning streak shields, and reviewing 7-day angular FL consistency curves.
-6. **1:21 - Step 5: Collision-Proof Cross-Device Vault Migration:** Generating an 8-character cryptographic token (`HAB-XXXX-XXXX`), enabling optional 4-digit PIN encryption, burn-on-redeem protection, and instant 1-tap restore on a new device.
-7. **1:42 - Conclusion & Get Started:** How to star the repository, grab the release, and build unstoppable daily discipline.
+### 🎙️ Dynamic Video Chapters & Interactive Walkthrough:
+1. **0:00 - Introduction & Dynamic Island:** Overview of Habito v2.0, authentic Neo-Brutalist visual identity, and live Dynamic Island alerts on iPhone mobile chassis.
+2. **0:12 - Interactive Check-In & Fuel Surge:** Simulated touch check-in with 2px tactile depress; live Fuel Meter surges from 50% to 75% as the Dynamic Island pulses with streak momentum (`⚡ 75% FUEL • +1 STREAK 🔥`).
+3. **0:26 - Dynamic Tab Switch to Effort Audit:** Seamless navigation to the Audit tab; 7-day angular consistency bars animate upward with real computed data; streak freeze shields protection.
+4. **0:39 - Migration Vault & PIN Double-Lock:** Dynamic token generation (`HAB-9K2M-7Q4X`, 2.8 Trillion combinations), interactive 4-digit PIN typing (`••••`), and vault lock activation.
+5. **0:52 - Conclusion & Direct Download:** How to download `app-release.apk` for phones or `app-release.aab` for the Google Play Store.
 
 ---
 
